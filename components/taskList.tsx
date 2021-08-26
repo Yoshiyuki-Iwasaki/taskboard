@@ -72,7 +72,12 @@ const taskList = () => {
     <>
       <button onClick={() => logout()}>ログアウト</button>
       <ul>
-        {todos && todos.map(todo => <li key={todo.id}>{todo.message}</li>)}
+        {todos &&
+          todos.map(todo => (
+            <li key={todo.id}>
+              <a href={`posts/${todo.id}`}>{todo.message}</a>
+            </li>
+          ))}
       </ul>
       <form onSubmit={e => handleSubmit(e)}>
         <input
