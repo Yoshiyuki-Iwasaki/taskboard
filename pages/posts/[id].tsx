@@ -2,6 +2,7 @@ import React, { useEffect, useState} from "react";
 import firebase from "../../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
+import { useRouter } from "next/router";
 interface Comment {
   id: number;
   message: string;
@@ -19,16 +20,14 @@ const index = ({ todo }) => {
   const convertJST = new Date();
   convertJST.setHours(convertJST.getHours());
   const updatedTime = convertJST.toLocaleString("ja-JP").slice(0, -3);
+  const router = useRouter();
 
-  const [chatList, chatListsLoading, chatListsError] = useCollection(
-    firebase.firestore().collection("chatList")
+  const [commentlists, commentlistsLoading, commentlistsError] = useCollection(
+    firebase
+      .firestore()
+      .collection("comment")
+      .where("postID", "==", router.query.id)
   );
-
-  const [todolists, todolistsLoading, todolistsError] = useCollection(
-    firebase.firestore().collection("comment")
-  );
-
-  console.log(todolists);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -38,7 +37,7 @@ const index = ({ todo }) => {
       id: new Date().getTime(),
       message: text,
       userId: user.uid,
-      postID: '',
+      postID: router.query.id,
       createdAt: updatedTime,
     });
     setText("");
@@ -46,6 +45,14 @@ const index = ({ todo }) => {
   return (
     <>
       <p>{todo.message}</p>
+      <ul>
+        {commentlists &&
+          commentlists.docs.map(doc => (
+            <li key={doc.data().id}>
+              <a href={`posts/${doc.data().id}`}>{doc.data().message}</a>
+            </li>
+          ))}
+      </ul>
       <form onSubmit={e => handleSubmit(e)}>
         <input
           type="text"
