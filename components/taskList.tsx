@@ -7,6 +7,9 @@ interface Todo {
   id: number;
   message: string;
   userId: string;
+  comments: string[];
+  people: string[];
+  tag: string[];
   createdAt: string;
 }
 
@@ -26,56 +29,32 @@ const taskList = () => {
     {}
   );
 
-  if (todolistsLoading && todolists) {
-    todolists.docs.map(doc => console.log(doc.data()));
-  }
-
-  useEffect(() => {
-    (async () => {
-      const resTodo = await db.collection("chatList").doc("chat").get();
-      setTodos(resTodo.data().chat);
-      setIsLoading(false);
-    })();
-  }, [db]);
-
-  useEffect(() => {
-    if (isChangedTodo) {
-      (async () => {
-        setIsLoading(true);
-        const docRef = await db.collection("chatList").doc("chat");
-        docRef.update({ chat: todos });
-        setIsLoading(false);
-      })();
-    }
-  }, [todos, isChangedTodo, db]);
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     if (!text) return;
     setIsChangedTodo(true);
-    const newTodo: Todo = {
+    await db.collection("chatList").add({
       id: new Date().getTime(),
       message: text,
       userId: user.uid,
       createdAt: updatedTime,
-    };
-    console.log([...todos]);
-    setTodos([...todos, newTodo]);
+      comments: [],
+      people: [],
+      tag: [],
+    });
     setText("");
-  }
-
+  };
   const logout = () => {
     firebase.auth().signOut();
   };
-
   return (
     <>
       <button onClick={() => logout()}>ログアウト</button>
       <ul>
-        {todos &&
-          todos.map(todo => (
-            <li key={todo.id}>
-              <a href={`posts/${todo.id}`}>{todo.message}</a>
+        {todolists &&
+          todolists.docs.map(doc => (
+            <li key={doc.data().id}>
+              <a href={`posts/${doc.data().id}`}>{doc.data().message}</a>
             </li>
           ))}
       </ul>
