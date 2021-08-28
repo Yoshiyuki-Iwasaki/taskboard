@@ -7,9 +7,6 @@ interface Todo {
   id: number;
   message: string;
   userId: string;
-  comments: string[];
-  people: string[];
-  tag: string[];
   createdAt: string;
 }
 
@@ -38,9 +35,6 @@ const taskList = () => {
       message: text,
       userId: user.uid,
       createdAt: updatedTime,
-      comments: [],
-      people: [],
-      tag: [],
     });
     setText("");
   };
