@@ -22,7 +22,7 @@ const taskList = () => {
   const updatedTime = convertJST.toLocaleString("ja-JP").slice(0, -3);
 
   const [todolists, todolistsLoading, todolistsError] = useCollection(
-    firebase.firestore().collection("chatList"),
+    firebase.firestore().collection("chatList").orderBy("id",'desc'),
     {}
   );
 
