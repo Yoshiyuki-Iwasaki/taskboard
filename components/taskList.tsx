@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import firebase from "../firebase/clientApp";
-
+import Header from "./Header";
 interface Todo {
   id: number;
   message: string;
@@ -22,7 +22,7 @@ const taskList = () => {
   const updatedTime = convertJST.toLocaleString("ja-JP").slice(0, -3);
 
   const [todolists, todolistsLoading, todolistsError] = useCollection(
-    firebase.firestore().collection("chatList"),
+    firebase.firestore().collection("chatList").orderBy("id",'desc'),
     {}
   );
 
@@ -43,20 +43,24 @@ const taskList = () => {
   };
   return (
     <>
-      <button onClick={() => logout()}>ログアウト</button>
-      <ul>
+      <Header />
+      <ul className="flex flex-wrap max-w-screen-lg mt-28 mx-auto">
         {todolists &&
           todolists.docs.map(doc => (
-            <li key={doc.data().id}>
+            <li
+              key={doc.data().id}
+              className="my-1 w-1/4 px-5 py-5 border-4 border-light-blue-500 border-opacity-25"
+            >
               <a href={`posts/${doc.data().id}`}>{doc.data().message}</a>
             </li>
           ))}
       </ul>
-      <form onSubmit={e => handleSubmit(e)}>
+      <form onSubmit={e => handleSubmit(e)} className="mt-5	text-center">
         <input
           type="text"
           value={text}
           onChange={e => setText(e.target.value)}
+          className="border-4 border-light-blue-500 border-opacity-25"
         />
         <input type="submit" value="追加" onClick={e => handleSubmit(e)} />
       </form>
