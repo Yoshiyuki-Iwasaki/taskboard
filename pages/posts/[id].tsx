@@ -3,6 +3,9 @@ import firebase from "../../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useRouter } from "next/router";
+import Header from "../../components/Header";
+import Auth from "../../components/Auth";
+
 interface Comment {
   id: number;
   message: string;
@@ -80,68 +83,92 @@ const index = ({ todo }) => {
     setComment("");
   };
 
+  if (loading || peoplelistsLoading || taglistsLoading || commentlistsLoading) {
+    return <h6>Loading...</h6>;
+  }
+
+  if (error || peoplelistsError || taglistsError || commentlistsError) {
+    return null;
+  }
+
   return (
     <>
-      <p>{todo.message}</p>
-      <h3>担当者</h3>
-      <ul>
-        {peoplelists &&
-          peoplelists.docs.map(doc => (
-            <li key={doc.data().id}>
-              <a href={`posts/${doc.data().id}`}>{doc.data().text}</a>
-            </li>
-          ))}
-      </ul>
-      <form onSubmit={e => handlePeopleSubmit(e)}>
-        <input
-          type="text"
-          value={people}
-          onChange={e => setPeople(e.target.value)}
-        />
-        <input
-          type="submit"
-          value="追加"
-          onClick={e => handlePeopleSubmit(e)}
-        />
-      </form>
-      <h3>タグ</h3>
-      <ul>
-        {taglists &&
-          taglists.docs.map(doc => (
-            <li key={doc.data().id}>
-              <a href={`posts/${doc.data().id}`}>{doc.data().name}</a>
-            </li>
-          ))}
-      </ul>
-      <form onSubmit={e => handleTagSubmit(e)}>
-        <input
-          type="text"
-          value={tag}
-          onChange={e => setTag(e.target.value)}
-        />
-        <input type="submit" value="追加" onClick={e => handleTagSubmit(e)} />
-      </form>
-      <h3>コメント</h3>
-      <ul>
-        {commentlists &&
-          commentlists.docs.map(doc => (
-            <li key={doc.data().id}>
-              <a href={`posts/${doc.data().id}`}>{doc.data().message}</a>
-            </li>
-          ))}
-      </ul>
-      <form onSubmit={e => handleCommentSubmit(e)}>
-        <input
-          type="text"
-          value={comment}
-          onChange={e => setComment(e.target.value)}
-        />
-        <input
-          type="submit"
-          value="追加"
-          onClick={e => handleCommentSubmit(e)}
-        />
-      </form>
+      {!user ? (
+        <Auth />
+      ) : (
+        <>
+          <Header />
+          <div className="max-w-screen-lg mt-28 mx-auto">
+            <h1 className="mt-6 text-2xl font-bold">{todo.message}</h1>
+            <ul className="mt-5">
+              {peoplelists &&
+                peoplelists.docs.map(doc => (
+                  <li key={doc.data().id}>
+                    <a href={`posts/${doc.data().id}`}>{doc.data().text}</a>
+                  </li>
+                ))}
+            </ul>
+            <form className="mt-3" onSubmit={e => handlePeopleSubmit(e)}>
+              <input
+                className="border-4 border-light-blue-500 border-opacity-25"
+                type="text"
+                value={people}
+                onChange={e => setPeople(e.target.value)}
+                placeholder="担当者"
+              />
+              <input
+                type="submit"
+                value="追加"
+                onClick={e => handlePeopleSubmit(e)}
+              />
+            </form>
+            <ul className="mt-5">
+              {taglists &&
+                taglists.docs.map(doc => (
+                  <li key={doc.data().id}>
+                    <a href={`posts/${doc.data().id}`}>{doc.data().name}</a>
+                  </li>
+                ))}
+            </ul>
+            <form className="mt-3" onSubmit={e => handleTagSubmit(e)}>
+              <input
+                className="border-4 border-light-blue-500 border-opacity-25"
+                type="text"
+                value={tag}
+                onChange={e => setTag(e.target.value)}
+                placeholder="タグ"
+              />
+              <input
+                type="submit"
+                value="追加"
+                onClick={e => handleTagSubmit(e)}
+              />
+            </form>
+            <ul className="mt-14">
+              {commentlists &&
+                commentlists.docs.map(doc => (
+                  <li key={doc.data().id}>
+                    <a href={`posts/${doc.data().id}`}>{doc.data().message}</a>
+                  </li>
+                ))}
+            </ul>
+            <form className="mt-3" onSubmit={e => handleCommentSubmit(e)}>
+              <input
+                className="border-4 border-light-blue-500 border-opacity-25"
+                type="text"
+                value={comment}
+                onChange={e => setComment(e.target.value)}
+                placeholder="コメント"
+              />
+              <input
+                type="submit"
+                value="追加"
+                onClick={e => handleCommentSubmit(e)}
+              />
+            </form>
+          </div>
+        </>
+      )}
     </>
   );
 };
