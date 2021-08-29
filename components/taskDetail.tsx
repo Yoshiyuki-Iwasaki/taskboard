@@ -5,13 +5,13 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import { useRouter } from "next/router";
 import Header from "../components/Header";
 import Auth from "../components/Auth";
+import CommentLists from "../components/commentLists";
 
 const TaskDetail = ({ todo }) => {
   const db = firebase.firestore();
   const [user, loading, error] = useAuthState(firebase.auth());
   const [people, setPeople] = useState("");
   const [tag, setTag] = useState("");
-  const [comment, setComment] = useState("");
   const convertJST = new Date();
   convertJST.setHours(convertJST.getHours());
   const updatedTime = convertJST.toLocaleString("ja-JP").slice(0, -3);
@@ -27,12 +27,6 @@ const TaskDetail = ({ todo }) => {
     firebase
       .firestore()
       .collection("tag")
-      .where("postID", "==", router.query.id)
-  );
-  const [commentlists, commentlistsLoading, commentlistsError] = useCollection(
-    firebase
-      .firestore()
-      .collection("comment")
       .where("postID", "==", router.query.id)
   );
 
@@ -60,24 +54,10 @@ const TaskDetail = ({ todo }) => {
     setTag("");
   };
 
-  const handleCommentSubmit = async e => {
-    e.preventDefault();
-    if (!comment) return;
-    await db.collection("comment").add({
-      id: new Date().getTime(),
-      message: comment,
-      userId: user.uid,
-      postID: router.query.id,
-      createdAt: updatedTime,
-    });
-    setComment("");
-  };
-
-  if (loading || peoplelistsLoading || taglistsLoading || commentlistsLoading) {
+  if (peoplelistsLoading || taglistsLoading) {
     return <h6>Loading...</h6>;
   }
-
-  if (error || peoplelistsError || taglistsError || commentlistsError) {
+  if (peoplelistsError || taglistsError) {
     return null;
   }
 
@@ -134,28 +114,7 @@ const TaskDetail = ({ todo }) => {
                 onClick={e => handleTagSubmit(e)}
               />
             </form>
-            <ul className="mt-14">
-              {commentlists &&
-                commentlists.docs.map(doc => (
-                  <li key={doc.data().id}>
-                    <a href={`posts/${doc.data().id}`}>{doc.data().message}</a>
-                  </li>
-                ))}
-            </ul>
-            <form className="mt-3" onSubmit={e => handleCommentSubmit(e)}>
-              <input
-                className="border-4 border-light-blue-500 border-opacity-25"
-                type="text"
-                value={comment}
-                onChange={e => setComment(e.target.value)}
-                placeholder="コメント"
-              />
-              <input
-                type="submit"
-                value="追加"
-                onClick={e => handleCommentSubmit(e)}
-              />
-            </form>
+            <CommentLists />
           </div>
         </>
       )}

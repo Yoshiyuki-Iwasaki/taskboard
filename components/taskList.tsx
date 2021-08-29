@@ -41,6 +41,12 @@ const taskList = () => {
   const logout = () => {
     firebase.auth().signOut();
   };
+  if (todolistsLoading) {
+    return <h6>Loading...</h6>;
+  }
+  if (todolistsError) {
+    return null;
+  }
   return (
     <>
       <Header />
