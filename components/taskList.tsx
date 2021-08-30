@@ -38,9 +38,6 @@ const taskList = () => {
     });
     setText("");
   };
-  const logout = () => {
-    firebase.auth().signOut();
-  };
   if (todolistsLoading) {
     return <h6>Loading...</h6>;
   }
