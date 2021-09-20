@@ -47,12 +47,12 @@ const taskList = () => {
   return (
     <>
       <Header />
-      <ul className="flex flex-wrap max-w-screen-lg mt-28 mx-auto">
+      <ul className="max-w-screen-lg mt-28 mb-12 mx-auto">
         {todolists &&
           todolists.docs.map(doc => (
             <li
               key={doc.data().id}
-              className="my-1 w-1/4 px-5 py-5 border-4 border-light-blue-500 border-opacity-25"
+              className="my-2 w-1/4 px-5 py-5 border-4 border-light-blue-500 border-opacity-25"
             >
               <a href={`posts/${doc.data().id}`}>{doc.data().message}</a>
             </li>
