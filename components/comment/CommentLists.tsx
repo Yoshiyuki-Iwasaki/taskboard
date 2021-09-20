@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import firebase from "../firebase/clientApp";
+import firebase from "../../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useRouter } from "next/router";
-import { useDocument } from "react-firebase-hooks/firestore";
-import CommentItem from "./commentItem";
+import CommentItem from "./CommentItem";
 
-const commentLists = () => {
+const CommentLists = () => {
   const db = firebase.firestore();
   const [user, loading, error] = useAuthState(firebase.auth());
   const [comment, setComment] = useState("");
@@ -71,4 +70,4 @@ const commentLists = () => {
   );
 };
 
-export default commentLists;
+export default CommentLists;

@@ -1,8 +1,8 @@
 import React from 'react'
-import firebase from "../firebase/clientApp";
+import firebase from "../../firebase/clientApp";
 import { useDocument } from "react-firebase-hooks/firestore";
 
-const commentItem = ({ id, message, userId, postID, createdAt}) => {
+const CommentItem = ({ id, message, userId, postID, createdAt }) => {
   const [value, valueLoading, valueError] = useDocument(
     firebase.firestore().doc(`users/${userId}`)
   );
@@ -26,6 +26,6 @@ const commentItem = ({ id, message, userId, postID, createdAt}) => {
       </div>
     </li>
   );
-}
+};
 
-export default commentItem
+export default CommentItem;

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import firebase from "../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useRouter } from "next/router";
 import Header from "../components/Header";
 import Auth from "../components/Auth";
-import CommentLists from "../components/commentLists";
+import CommentLists from "./comment/CommentLists";
 
 const TaskDetail = ({ todo }) => {
   const db = firebase.firestore();
