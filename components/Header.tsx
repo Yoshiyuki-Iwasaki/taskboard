@@ -4,12 +4,19 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 const Header = () => {
   const [user, loading, error] = useAuthState(firebase.auth());
-    const logout = () => {
-      firebase.auth().signOut();
-    };
+  const logout = () => {
+    firebase.auth().signOut();
+  };
+  if (loading) {
+    return <h6>Loading...</h6>;
+  }
+  if (error) {
+    return null;
+  }
   return (
     <header className="fixed top-0 left-0 w-full bg-gray-100 mx-auto">
-      <div className="md:w-9/12 p-3 text-right mx-auto flex justify-end">
+      <div className="md:w-9/12 p-3 text-right mx-auto flex items-center justify-between">
+        <h1>Task Board</h1>
         <div className="w-48 flex justify-between	items-center">
           {user.displayName && <p>{user.displayName}</p>}
           <button

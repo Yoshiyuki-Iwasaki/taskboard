@@ -68,8 +68,9 @@ const TaskDetail = ({ todo }) => {
       ) : (
         <>
           <Header />
-          <div className="max-w-screen-lg mt-28 mx-auto">
+          <div className="max-w-screen-lg mt-28 mb-12 mx-auto">
             <h1 className="mt-6 text-2xl font-bold">{todo.message}</h1>
+            <h2>担当者</h2>
             <ul className="mt-5">
               {peoplelists &&
                 peoplelists.docs.map(doc => (
@@ -92,6 +93,7 @@ const TaskDetail = ({ todo }) => {
                 onClick={e => handlePeopleSubmit(e)}
               />
             </form>
+            <h2>タグ</h2>
             <ul className="mt-5">
               {taglists &&
                 taglists.docs.map(doc => (
@@ -114,6 +116,7 @@ const TaskDetail = ({ todo }) => {
                 onClick={e => handleTagSubmit(e)}
               />
             </form>
+            <h2>コメント</h2>
             <CommentLists />
           </div>
         </>
