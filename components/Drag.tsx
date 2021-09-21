@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import firebase from "../firebase/clientApp";
 
 const Drag = ({ chatList, data }: any) => {
   const [dragging, setDragging] = useState(false);
@@ -13,9 +14,6 @@ const Drag = ({ chatList, data }: any) => {
         test.push(doc.data());
       });
   }, []);
-
-  console.log('list',list);
-  console.log('test',test);
 
   const handleDragStart = (e, params) => {
     console.log("drag start", params);
@@ -48,9 +46,11 @@ const Drag = ({ chatList, data }: any) => {
     }
   };
 
-  const handleDragEnd = () => {
+  const handleDragEnd = async () => {
     console.log("Ending drag");
     setDragging(false);
+    // const docRef = await db.collection("chatList").doc("block03");
+    // docRef.update({ items: test });
     dragNode.current.removeEventListener("dragend", handleDragEnd);
     dragItem.current = null;
     dragNode.current = null;

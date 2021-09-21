@@ -1,22 +1,14 @@
-import React, { useEffect, useState} from "react";
 import firebase from "../../firebase/clientApp";
-import { useAuthState } from "react-firebase-hooks/auth";
-import Header from "../../components/Header";
-import Auth from "../../components/Auth";
+import Layout from "../../components/Layout";
 import TaskDetail from "../../components/taskDetail";
 
 const PostDetail = ({ todo }) => {
-  const [user, loading, error] = useAuthState(firebase.auth());
 
-  if (loading) {
-    return <h6>Loading...</h6>;
-  }
-
-  if (error) {
-    return null;
-  }
-
-  return <>{!user ? <Auth /> : <TaskDetail todo={todo} />}</>;
+  return (
+    <Layout>
+      <TaskDetail todo={todo} />
+    </Layout>
+  );
 };
 
 export default PostDetail;
