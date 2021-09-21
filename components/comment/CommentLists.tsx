@@ -31,10 +31,10 @@ const CommentLists = () => {
     });
     setComment("");
   };
-  if (commentlistsLoading) {
+  if (loading || commentlistsLoading) {
     return <h6>Loading...</h6>;
   }
-  if (commentlistsError) {
+  if (error || commentlistsError) {
     return null;
   }
   return (

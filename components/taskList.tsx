@@ -36,10 +36,7 @@ const taskList = () => {
 
   useEffect(() => {
     (async () => {
-      const resTodo = await db
-        .collection("chatList")
-        .doc("todo")
-        .get();
+      const resTodo = await db.collection("chatList").doc("block03").get();
       setTodos(resTodo.data().items);
       setIsLoading(false);
     })();
@@ -49,7 +46,7 @@ const taskList = () => {
     if (isChangedTodo) {
       (async () => {
         setIsLoading(true);
-        const docRef = await db.collection("chatList").doc("todo");
+        const docRef = await db.collection("chatList").doc("block03");
         docRef.update({ items: todos });
         setIsLoading(false);
       })();
@@ -64,7 +61,6 @@ const taskList = () => {
       id: new Date().getTime(),
       message: text,
       userId: user.uid,
-      state: 'todo',
       createdAt: updatedTime,
     };
     setTodos([...todos, newTodo]);
