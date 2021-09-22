@@ -3,11 +3,10 @@ import firebase from "../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useRouter } from "next/router";
-import Header from "../components/Header";
 import Auth from "../components/Auth";
 import CommentLists from "./comment/CommentLists";
 
-const TaskDetail = ({ todo }) => {
+const TaskDetail = ({ todo }:any) => {
   const db = firebase.firestore();
   const [user, loading, error] = useAuthState(firebase.auth());
   const [people, setPeople] = useState("");

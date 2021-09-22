@@ -3,7 +3,7 @@ import Auth from "./Auth";
 import firebase from "../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-const Layout = ({ children }) => {
+const Layout = ({ children }:any) => {
   const [user, loading, error] = useAuthState(firebase.auth());
 
   if (loading) {

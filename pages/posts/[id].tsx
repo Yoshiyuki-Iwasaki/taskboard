@@ -2,7 +2,7 @@ import firebase from "../../firebase/clientApp";
 import Layout from "../../components/Layout";
 import TaskDetail from "../../components/taskDetail";
 
-const PostDetail = ({ todo }) => {
+const PostDetail = ({ todo }:any) => {
 
   return (
     <Layout>
