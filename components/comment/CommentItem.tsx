@@ -2,7 +2,15 @@ import React from 'react'
 import firebase from "../../firebase/clientApp";
 import { useDocument } from "react-firebase-hooks/firestore";
 
-const CommentItem = ({ id, message, userId, postID, createdAt }) => {
+interface Comment {
+  id: number;
+  message: string;
+  userId: string;
+  postID: string;
+  createdAt: string;
+}
+
+const CommentItem = ({ id, message, userId, postID, createdAt }:Comment) => {
   const [value, valueLoading, valueError] = useDocument(
     firebase.firestore().doc(`users/${userId}`)
   );

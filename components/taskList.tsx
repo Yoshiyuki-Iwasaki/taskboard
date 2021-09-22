@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import firebase from "../firebase/clientApp";
-import Header from "./Header";
 import Drag from './Drag';
+
 interface Todo {
   id: number;
   message: string;
@@ -20,7 +20,6 @@ const data = [
 
 const taskList = () => {
   const db = firebase.firestore();
-  const [draggedId, setDraggedId] = useState(-1);
   const [text, setText] = useState("");
   const [user, loading, error] = useAuthState(firebase.auth());
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -75,7 +74,6 @@ const taskList = () => {
   }
   return (
     <>
-      <Header />
       <form onSubmit={e => handleSubmit(e)} className="mt-5	text-center">
         <input
           type="text"
