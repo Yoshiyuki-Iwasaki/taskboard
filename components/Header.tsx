@@ -1,7 +1,7 @@
 import React from 'react'
 import firebase from "../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
-
+import Link from 'next/link';
 const Header = () => {
   const [user, loading, error] = useAuthState(firebase.auth());
   const logout = () => {
@@ -16,7 +16,11 @@ const Header = () => {
   return (
     <header className="w-full bg-gray-100 mx-auto">
       <div className="md:w-9/12 p-3 text-right mx-auto flex items-center justify-between">
-        <h1>Task Board</h1>
+        <h1>
+          <Link href='/' as='/'>
+            <a>Task Board</a>
+          </Link>
+        </h1>
         <div className="w-48 flex justify-between	items-center">
           {user.displayName && <p>{user.displayName}</p>}
           <button

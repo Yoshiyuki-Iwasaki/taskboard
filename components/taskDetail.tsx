@@ -66,7 +66,6 @@ const TaskDetail = ({ todo }:any) => {
         <Auth />
       ) : (
         <>
-          <Header />
           <div className="max-w-screen-lg mt-28 mb-12 mx-auto">
             <h1 className="mt-6 text-2xl font-bold">{todo.message}</h1>
             <h2>担当者</h2>
