@@ -3,7 +3,7 @@ import firebase from "../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { useRouter } from "next/router";
-import Auth from "../components/Auth";
+import Auth from "./Auth";
 import CommentLists from "./comment/CommentLists";
 
 const TaskDetail = ({ todo }:any) => {

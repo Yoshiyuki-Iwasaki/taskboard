@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import firebase from "../firebase/clientApp";
 import Drag from './Drag';
-import TaskInput from "./taskInput";
+import TaskInput from "./TaskInput";
 
 interface Todo {
   id: number;
@@ -16,6 +16,7 @@ interface Todo {
 const taskList = () => {
   const db = firebase.firestore();
   const [text, setText] = useState("");
+  const [list, setList] = useState([]);
   const [user, loading, error] = useAuthState(firebase.auth());
   const [todos, setTodos] = useState<Todo[]>([]);
   const [isChangedTodo, setIsChangedTodo] = useState(false);
@@ -30,9 +31,10 @@ const taskList = () => {
 
   useEffect(() => {
     (async () => {
-      const resTodo = await db.collection("chatList").doc("block03").get();
+      const resTodo = await db.collection("chatList").doc("block01").get();
       setTodos(resTodo.data().items);
       setIsLoading(false);
+      console.log("test");
     })();
   }, [db]);
 
@@ -40,11 +42,12 @@ const taskList = () => {
     if (isChangedTodo) {
       (async () => {
         setIsLoading(true);
-        const docRef = await db.collection("chatList").doc("block03");
+        const docRef = await db.collection("chatList").doc("block01");
         docRef.update({ items: todos });
         setIsLoading(false);
       })();
     }
+    console.log("test02");
   }, [todos, isChangedTodo, db]);
 
   const handleSubmit = e => {
@@ -57,6 +60,7 @@ const taskList = () => {
       userId: user.uid,
       createdAt: updatedTime,
     };
+    list[0].items.push(newTodo);
     setTodos([...todos, newTodo]);
     setText("");
   };
@@ -71,7 +75,7 @@ const taskList = () => {
     <>
       <TaskInput text={text} setText={setText} handleSubmit={handleSubmit} />
       <div className="flex">
-        <Drag chatList={chatList} />
+        <Drag list={list} setList={setList} chatList={chatList} />
       </div>
     </>
   );
