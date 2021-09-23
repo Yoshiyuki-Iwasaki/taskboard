@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from "react";
+import firebase from "../firebase/clientApp";
 
 const Drag = ({ chatList, list, setList }: any) => {
+  const db = firebase.firestore();
   const [dragging, setDragging] = useState(false);
   const dragItem = useRef();
   const dragNode = useRef();
@@ -11,6 +13,17 @@ const Drag = ({ chatList, list, setList }: any) => {
         list.push(doc.data());
       });
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      const docRef = await db.collection("chatList").doc("block01");
+      docRef.update({ items: list[0].items });
+      const docRef02 = await db.collection("chatList").doc("block02");
+      docRef02.update({ items: list[1].items });
+      const docRef03 = await db.collection("chatList").doc("block03");
+      docRef03.update({ items: list[2].items });
+    })();
+  }, [list]);
 
   const handleDragStart = (e, params) => {
     console.log("drag start", params);
@@ -36,7 +49,6 @@ const Drag = ({ chatList, list, setList }: any) => {
             1
           )[0]
         );
-        console.log("newList", newList);
         dragItem.current = params;
         return newList;
       });
@@ -46,8 +58,6 @@ const Drag = ({ chatList, list, setList }: any) => {
   const handleDragEnd = async () => {
     console.log("Ending drag");
     setDragging(false);
-    // const docRef = await db.collection("chatList").doc("block03");
-    // docRef.update({ items: test });
     dragNode.current.removeEventListener("dragend", handleDragEnd);
     dragItem.current = null;
     dragNode.current = null;
