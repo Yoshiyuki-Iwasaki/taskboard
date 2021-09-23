@@ -1,4 +1,4 @@
-import TaskList from '../components/taskList';
+import TaskList from '../components/TaskList';
 import Layout from '../components/Layout';
 
 export default function Home() {
