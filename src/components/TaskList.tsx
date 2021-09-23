@@ -20,7 +20,6 @@ const taskList = () => {
   const [user, loading, error] = useAuthState(firebase.auth());
   const [todos, setTodos] = useState<Todo[]>([]);
   const [isChangedTodo, setIsChangedTodo] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const convertJST = new Date();
   convertJST.setHours(convertJST.getHours());
   const updatedTime = convertJST.toLocaleString("ja-JP").slice(0, -3);
@@ -33,21 +32,16 @@ const taskList = () => {
     (async () => {
       const resTodo = await db.collection("chatList").doc("block01").get();
       setTodos(resTodo.data().items);
-      setIsLoading(false);
-      console.log("test");
     })();
   }, [db]);
 
   useEffect(() => {
     if (isChangedTodo) {
       (async () => {
-        setIsLoading(true);
         const docRef = await db.collection("chatList").doc("block01");
         docRef.update({ items: todos });
-        setIsLoading(false);
       })();
     }
-    console.log("test02");
   }, [todos, isChangedTodo, db]);
 
   const handleSubmit = e => {
