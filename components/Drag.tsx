@@ -1,17 +1,16 @@
 import { useState, useRef, useEffect } from "react";
 import firebase from "../firebase/clientApp";
 
-const Drag = ({ chatList, data }: any) => {
+const Drag = ({ chatList }: any) => {
   const [dragging, setDragging] = useState(false);
-  const [list, setList] = useState(data);
-  const [test, setTest] = useState([]);
+  const [list, setList] = useState([]);
   const dragItem = useRef();
   const dragNode = useRef();
 
   useEffect(() => {
     chatList &&
       chatList.docs.map((doc: any) => {
-        test.push(doc.data());
+        list.push(doc.data());
       });
   }, []);
 
@@ -29,7 +28,7 @@ const Drag = ({ chatList, data }: any) => {
     console.log("Entering drag...", params);
     const currentItem = dragItem.current;
     if (e.target !== dragNode.current) {
-      setTest(test => {
+      setList(test => {
         const newList = JSON.parse(JSON.stringify(test));
         newList[params.chatIndex].items.splice(
           params.todosIndex,
@@ -39,7 +38,7 @@ const Drag = ({ chatList, data }: any) => {
             1
           )[0]
         );
-        console.log('newList', newList);
+        console.log("newList", newList);
         dragItem.current = params;
         return newList;
       });
@@ -57,8 +56,8 @@ const Drag = ({ chatList, data }: any) => {
   };
   return (
     <>
-      {test &&
-        test.map((todos, chatIndex) => (
+      {list &&
+        list.map((todos, chatIndex) => (
           <ul
             key={chatIndex}
             // onDragEnter={

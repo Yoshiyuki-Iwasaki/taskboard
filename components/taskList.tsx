@@ -3,6 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import firebase from "../firebase/clientApp";
 import Drag from './Drag';
+import TaskInput from "./taskInput";
 
 interface Todo {
   id: number;
@@ -11,12 +12,6 @@ interface Todo {
   state: string;
   createdAt: string;
 }
-
-const data = [
-  { title: "groupe01", items: ["1", "2", "3"] },
-  { title: "groupe02", items: ["4", "5", "6"] },
-  { title: "groupe03", items: ["7", "8", "9"] },
-];
 
 const taskList = () => {
   const db = firebase.firestore();
@@ -74,17 +69,9 @@ const taskList = () => {
   }
   return (
     <>
-      <form onSubmit={e => handleSubmit(e)} className="mt-5	text-center">
-        <input
-          type="text"
-          value={text}
-          onChange={e => setText(e.target.value)}
-          className="border-4 border-light-blue-500 border-opacity-25 "
-        />
-        <input type="submit" value="追加" onClick={e => handleSubmit(e)} />
-      </form>
+      <TaskInput text={text} setText={setText} handleSubmit={handleSubmit} />
       <div className="flex">
-        <Drag chatList={chatList} data={data} />
+        <Drag chatList={chatList} />
       </div>
     </>
   );
