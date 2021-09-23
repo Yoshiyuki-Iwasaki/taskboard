@@ -1,6 +1,6 @@
 import firebase from "../../firebase/clientApp";
 import Layout from "../../components/Layout";
-import TaskDetail from "../../components/taskDetail";
+import TaskDetail from "../../components/TaskDetail";
 
 const PostDetail = ({ todo }:any) => {
 

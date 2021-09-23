@@ -1,9 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import firebase from "../firebase/clientApp";
 
-const Drag = ({ chatList }: any) => {
+const Drag = ({ chatList, list, setList }: any) => {
   const [dragging, setDragging] = useState(false);
-  const [list, setList] = useState([]);
   const dragItem = useRef();
   const dragNode = useRef();
 

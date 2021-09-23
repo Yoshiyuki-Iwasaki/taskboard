@@ -1,6 +1,6 @@
 import React from 'react'
 
-const taskInput = ({ handleSubmit, text, setText }) => {
+const taskInput = ({ handleSubmit, text, setText }:any) => {
   return (
     <form onSubmit={e => handleSubmit(e)} className="mt-5	text-center">
       <input
