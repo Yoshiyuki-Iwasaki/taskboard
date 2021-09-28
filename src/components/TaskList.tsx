@@ -4,6 +4,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import firebase from "../firebase/clientApp";
 import Drag from './Drag';
 import TaskInput from "./TaskInput";
+import styled from 'styled-components';
 
 interface Todo {
   id: number;
@@ -13,10 +14,9 @@ interface Todo {
   createdAt: string;
 }
 
-const taskList = () => {
+const TaskList = () => {
   const db = firebase.firestore();
   const [text, setText] = useState("");
-  const [list, setList] = useState([]);
   const [user, loading, error] = useAuthState(firebase.auth());
   const [todos, setTodos] = useState<Todo[]>([]);
   const [isChangedTodo, setIsChangedTodo] = useState(false);
@@ -41,6 +41,7 @@ const taskList = () => {
         const docRef = await db.collection("chatList").doc("block01");
         docRef.update({ items: todos });
       })();
+      console.log("test07");
     }
   }, [todos, isChangedTodo, db]);
 
@@ -57,6 +58,7 @@ const taskList = () => {
     list[0].items.push(newTodo);
     setTodos([...todos, newTodo]);
     setText("");
+    console.log("test08");
   };
 
   if (loading || chatListLoading) {
@@ -65,14 +67,19 @@ const taskList = () => {
   if (error || chatListError) {
     return null;
   }
+
+  const Main = styled.div`
+    display: flex;
+  `
+
   return (
     <>
       <TaskInput text={text} setText={setText} handleSubmit={handleSubmit} />
-      <div className="flex">
-        <Drag list={list} setList={setList} chatList={chatList} />
-      </div>
+      <Main>
+        <Drag db={db} chatList={chatList} />
+      </Main>
     </>
   );
 };
 
-export default taskList
+export default TaskList;
