@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`初期表示の確認 サンプルページ 1`] = `
+<DocumentFragment>
+  <h1>
+    このページの path は / です。
+  </h1>
+  <input
+    data-testid="input"
+    type="text"
+    value=""
+  />
+</DocumentFragment>
+`;

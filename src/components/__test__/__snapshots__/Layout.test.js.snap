@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`初期表示の確認 サンプルページ 1`] = `
+<DocumentFragment>
+  <header
+    class="w-full bg-gray-100 mx-auto"
+  >
+    <div
+      class="md:w-9/12 p-3 text-right mx-auto flex items-center justify-between"
+    >
+      <h1>
+        <a
+          href="/"
+        >
+          Task Board
+        </a>
+      </h1>
+      <div
+        class="w-48 flex justify-between	items-center"
+      >
+        <button
+          class="bg-gray-500 text-white font-medium p-4"
+        >
+          ログアウト
+        </button>
+      </div>
+    </div>
+  </header>
+  <input
+    data-testid="input"
+    type="text"
+    value=""
+  />
+</DocumentFragment>
+`;
