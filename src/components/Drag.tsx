@@ -1,18 +1,16 @@
 import { useState, useRef, useEffect } from "react";
 import firebase from "../firebase/clientApp";
 
-const Drag = ({ chatList, list, setList }: any) => {
+const Drag = ({ chatList}: any) => {
   const db = firebase.firestore();
   const [dragging, setDragging] = useState(false);
   const dragItem = useRef();
   const dragNode = useRef();
-
-  useEffect(() => {
-    chatList &&
-      chatList.docs.map((doc: any) => {
-        list.push(doc.data());
-      });
-  }, []);
+  const [list, setList] = useState([
+    chatList?.docs[0].data(),
+    chatList?.docs[1].data(),
+    chatList?.docs[2].data(),
+  ]);
 
   useEffect(() => {
     (async () => {
@@ -22,8 +20,9 @@ const Drag = ({ chatList, list, setList }: any) => {
       docRef02.update({ items: list[1].items });
       const docRef03 = await db.collection("chatList").doc("block03");
       docRef03.update({ items: list[2].items });
+      console.log("test01");
     })();
-  }, [list]);
+  },[list]);
 
   const handleDragStart = (e, params) => {
     console.log("drag start", params);
@@ -33,14 +32,15 @@ const Drag = ({ chatList, list, setList }: any) => {
     setTimeout(() => {
       setDragging(true);
     }, 0);
+    console.log("test03");
   };
 
   const handleDragEnter = (e, params) => {
     console.log("Entering drag...", params);
     const currentItem = dragItem.current;
     if (e.target !== dragNode.current) {
-      setList(test => {
-        const newList = JSON.parse(JSON.stringify(test));
+      setList(list => {
+        const newList = JSON.parse(JSON.stringify(list));
         newList[params.chatIndex].items.splice(
           params.todosIndex,
           0,
@@ -53,6 +53,7 @@ const Drag = ({ chatList, list, setList }: any) => {
         return newList;
       });
     }
+    console.log("test04");
   };
 
   const handleDragEnd = async () => {
@@ -61,6 +62,7 @@ const Drag = ({ chatList, list, setList }: any) => {
     dragNode.current.removeEventListener("dragend", handleDragEnd);
     dragItem.current = null;
     dragNode.current = null;
+    console.log("test05");
   };
   return (
     <>
@@ -73,7 +75,7 @@ const Drag = ({ chatList, list, setList }: any) => {
             //     ? e => handleDragEnter(e, { chatIndex, todosIndex: 0 })
             //     : null
             // }
-            className="mt-14 mb-12 mx-auto"
+            className="mt-14 mb-12 mx-auto w-56"
           >
             <li>
               <p>{todos.title}</p>
