@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import firebase from "../firebase/clientApp";
+import firebase from "../../firebase/clientApp";
 import styled from 'styled-components';
 import Modal from "./Modal";
 
@@ -21,7 +21,7 @@ const List = styled.div`
   border-radius: 5px;
 `;
 
-const Drag = ({ chatList}: any) => {
+const TaskItem = ({ chatList }: any) => {
   const db = firebase.firestore();
   const [dragging, setDragging] = useState(false);
   const dragItem = useRef();
@@ -117,4 +117,4 @@ const Drag = ({ chatList}: any) => {
   );
 };
 
-export default Drag
+export default TaskItem;
