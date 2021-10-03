@@ -32,7 +32,6 @@ const Drag = ({ chatList}: any) => {
     setTimeout(() => {
       setDragging(true);
     }, 0);
-    console.log("test03");
   };
 
   const handleDragEnter = (e, params) => {
@@ -53,7 +52,6 @@ const Drag = ({ chatList}: any) => {
         return newList;
       });
     }
-    console.log("test04");
   };
 
   const handleDragEnd = async () => {

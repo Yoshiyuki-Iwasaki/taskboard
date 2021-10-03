@@ -41,7 +41,6 @@ const TaskList = () => {
         const docRef = await db.collection("chatList").doc("block01");
         docRef.update({ items: todos });
       })();
-      console.log("test07");
     }
   }, [todos, isChangedTodo, db]);
 
@@ -58,7 +57,6 @@ const TaskList = () => {
     list[0].items.push(newTodo);
     setTodos([...todos, newTodo]);
     setText("");
-    console.log("test08");
   };
 
   if (loading || chatListLoading) {
