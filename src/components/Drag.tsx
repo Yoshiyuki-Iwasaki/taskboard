@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import firebase from "../firebase/clientApp";
 
 const Drag = ({ chatList}: any) => {
@@ -11,18 +11,6 @@ const Drag = ({ chatList}: any) => {
     chatList?.docs[1].data(),
     chatList?.docs[2].data(),
   ]);
-
-  useEffect(() => {
-    (async () => {
-      const docRef = await db.collection("chatList").doc("block01");
-      docRef.update({ items: list[0].items });
-      const docRef02 = await db.collection("chatList").doc("block02");
-      docRef02.update({ items: list[1].items });
-      const docRef03 = await db.collection("chatList").doc("block03");
-      docRef03.update({ items: list[2].items });
-      console.log("test01");
-    })();
-  },[list]);
 
   const handleDragStart = (e, params) => {
     console.log("drag start", params);
@@ -60,44 +48,42 @@ const Drag = ({ chatList}: any) => {
     dragNode.current.removeEventListener("dragend", handleDragEnd);
     dragItem.current = null;
     dragNode.current = null;
-    console.log("test05");
+    const docRef = await db.collection("chatList").doc("block01");
+    docRef.update({ items: list[0].items });
+    const docRef02 = await db.collection("chatList").doc("block02");
+    docRef02.update({ items: list[1].items });
+    const docRef03 = await db.collection("chatList").doc("block03");
+    docRef03.update({ items: list[2].items });
   };
   return (
     <>
       {list &&
         list.map((todos, chatIndex) => (
-          <ul
+          <div
             key={chatIndex}
-            // onDragEnter={
-            //   dragging && todos.items.length
-            //     ? e => handleDragEnter(e, { chatIndex, todosIndex: 0 })
-            //     : null
-            // }
+            onDragEnter={dragging && !todos.items.length? e => handleDragEnter(e, { chatIndex, todosIndex: 0 }) : null}
             className="mt-14 mb-12 mx-auto w-56"
           >
-            <li>
-              <p>{todos.title}</p>
-              {todos.items &&
-                todos.items.map((doc, todosIndex) => (
-                  <div
-                    key={todosIndex}
-                    draggable
-                    onDragEnter={
-                      dragging
-                        ? e => handleDragEnter(e, { chatIndex, todosIndex })
-                        : null
-                    }
-                    onDragStart={e =>
-                      handleDragStart(e, { chatIndex, todosIndex })
-                    }
-                    data-id={doc.id}
-                    className="my-2 px-5 py-5 border-4 border-light-blue-500 border-opacity-25"
-                  >
-                    <a>{doc.message}</a>
-                  </div>
-                ))}
-            </li>
-          </ul>
+            <p>{todos.title}</p>
+            {todos.items && todos.items.map((doc, todosIndex) => (
+              <div
+                key={todosIndex}
+                draggable
+                onDragEnter={
+                  dragging
+                    ? e => handleDragEnter(e, { chatIndex, todosIndex })
+                    : null
+                }
+                onDragStart={e =>
+                  handleDragStart(e, { chatIndex, todosIndex })
+                }
+                data-id={doc.id}
+                className="my-2 px-5 py-5 border-4 border-light-blue-500 border-opacity-25"
+              >
+                <a>{doc.message}</a>
+              </div>
+            ))}
+          </div>
         ))}
     </>
   );
