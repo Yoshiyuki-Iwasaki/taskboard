@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import firebase from "../../firebase/clientApp";
-import Drag from '../Drag';
+import TaskItem from './TaskItem';
 import TaskInput from "./TaskInput";
 import styled from 'styled-components';
 
@@ -77,7 +77,7 @@ const TaskList = () => {
     <>
       <TaskInput text={text} setText={setText} handleSubmit={handleSubmit} />
       <Main>
-        <Drag db={db} chatList={chatList} />
+        <TaskItem db={db} chatList={chatList} />
       </Main>
     </>
   );
