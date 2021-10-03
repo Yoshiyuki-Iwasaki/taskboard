@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
-import firebase from "../firebase/clientApp";
-import Drag from './Drag';
+import firebase from "../../firebase/clientApp";
+import Drag from '../Drag';
 import TaskInput from "./TaskInput";
 import styled from 'styled-components';
 
