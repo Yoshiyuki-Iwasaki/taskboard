@@ -1,5 +1,24 @@
 import { useState, useRef } from "react";
 import firebase from "../firebase/clientApp";
+import styled from 'styled-components';
+
+const Board = styled.div`
+  padding: 10px;
+  width: 300px;
+  background: #0f5779;
+  border-radius: 5px;
+`;
+
+const Title = styled.h1`
+  font-size: 18px;
+  color: #fff;
+  font-weight: 700;
+`;
+
+const List = styled.div`
+  background: #fff;
+  border-radius: 5px;
+`;
 
 const Drag = ({ chatList}: any) => {
   const db = firebase.firestore();
@@ -55,35 +74,40 @@ const Drag = ({ chatList}: any) => {
     const docRef03 = await db.collection("chatList").doc("block03");
     docRef03.update({ items: list[2].items });
   };
+
   return (
     <>
       {list &&
         list.map((todos, chatIndex) => (
-          <div
+          <Board
             key={chatIndex}
-            onDragEnter={dragging && !todos.items.length? e => handleDragEnter(e, { chatIndex, todosIndex: 0 }) : null}
-            className="mt-14 mb-12 mx-auto w-56"
+            onDragEnter={
+              dragging && !todos.items.length
+                ? e => handleDragEnter(e, { chatIndex, todosIndex: 0 })
+                : null
+            }
           >
-            <p>{todos.title}</p>
-            {todos.items && todos.items.map((doc, todosIndex) => (
-              <div
-                key={todosIndex}
-                draggable
-                onDragEnter={
-                  dragging
-                    ? e => handleDragEnter(e, { chatIndex, todosIndex })
-                    : null
-                }
-                onDragStart={e =>
-                  handleDragStart(e, { chatIndex, todosIndex })
-                }
-                data-id={doc.id}
-                className="my-2 px-5 py-5 border-4 border-light-blue-500 border-opacity-25"
-              >
-                <a>{doc.message}</a>
-              </div>
-            ))}
-          </div>
+            <Title>{todos.title}</Title>
+            {todos.items &&
+              todos.items.map((doc, todosIndex) => (
+                <List
+                  key={todosIndex}
+                  draggable
+                  onDragEnter={
+                    dragging
+                      ? e => handleDragEnter(e, { chatIndex, todosIndex })
+                      : null
+                  }
+                  onDragStart={e =>
+                    handleDragStart(e, { chatIndex, todosIndex })
+                  }
+                  data-id={doc.id}
+                  className="my-2 px-5 py-5 border-4 border-light-blue-500 border-opacity-25"
+                >
+                  <a>{doc.message}</a>
+                </List>
+              ))}
+          </Board>
         ))}
     </>
   );

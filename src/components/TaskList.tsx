@@ -14,6 +14,13 @@ interface Todo {
   createdAt: string;
 }
 
+const Main = styled.div`
+  margin: 30px auto 0;
+  display: flex;
+  justify-content: space-between;
+  width: 1000px;
+`;
+
 const TaskList = () => {
   const db = firebase.firestore();
   const [text, setText] = useState("");
@@ -65,10 +72,6 @@ const TaskList = () => {
   if (error || chatListError) {
     return null;
   }
-
-  const Main = styled.div`
-    display: flex;
-  `
 
   return (
     <>
