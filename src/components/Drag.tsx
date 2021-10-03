@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import firebase from "../firebase/clientApp";
 import styled from 'styled-components';
+import Modal from "./Modal";
 
 const Board = styled.div`
   padding: 10px;
@@ -90,22 +91,25 @@ const Drag = ({ chatList}: any) => {
             <Title>{todos.title}</Title>
             {todos.items &&
               todos.items.map((doc, todosIndex) => (
-                <List
-                  key={todosIndex}
-                  draggable
-                  onDragEnter={
-                    dragging
-                      ? e => handleDragEnter(e, { chatIndex, todosIndex })
-                      : null
-                  }
-                  onDragStart={e =>
-                    handleDragStart(e, { chatIndex, todosIndex })
-                  }
-                  data-id={doc.id}
-                  className="my-2 px-5 py-5 border-4 border-light-blue-500 border-opacity-25"
-                >
-                  <a>{doc.message}</a>
-                </List>
+                <>
+                  <List
+                    key={todosIndex}
+                    draggable
+                    onDragEnter={
+                      dragging
+                        ? e => handleDragEnter(e, { chatIndex, todosIndex })
+                        : null
+                    }
+                    onDragStart={e =>
+                      handleDragStart(e, { chatIndex, todosIndex })
+                    }
+                    data-id={doc.id}
+                    className="my-2 px-5 py-5 border-4 border-light-blue-500 border-opacity-25"
+                  >
+                    <a>{doc.message}</a>
+                  </List>
+                  <Modal />
+                  </>
               ))}
           </Board>
         ))}
