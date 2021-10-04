@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import firebase from "../../firebase/clientApp";
 import styled from 'styled-components';
+import Modal from "./Modal";
 
 const Board = styled.div`
   padding: 10px;
@@ -41,7 +42,7 @@ const TaskItem = ({ chatList }: any) => {
     }, 0);
   };
 
-  const handleDragEnter = (e, params) => {
+  const handleDragEnter = async (e, params) => {
     console.log("Entering drag...", params);
     const currentItem = dragItem.current;
     if (e.target !== dragNode.current) {
@@ -61,19 +62,35 @@ const TaskItem = ({ chatList }: any) => {
     }
   };
 
-  const handleDragEnd = async () => {
+  const handleDragEnd = () => {
     console.log("Ending drag");
     setDragging(false);
     dragNode.current.removeEventListener("dragend", handleDragEnd);
     dragItem.current = null;
     dragNode.current = null;
+  };
+
+  const handleDragEnd02 = async () => {
+    console.log("Ending drag02");
     const docRef = await db.collection("chatList").doc("block01");
     docRef.update({ items: list[0].items });
     const docRef02 = await db.collection("chatList").doc("block02");
     docRef02.update({ items: list[1].items });
     const docRef03 = await db.collection("chatList").doc("block03");
     docRef03.update({ items: list[2].items });
-  };
+    console.log(
+      "docRef",
+      chatListBlock.docs.map(doc => {
+        console.log("doc.data()", doc.data());
+      })
+    );
+    console.log(
+      "list",
+      list.map(list => {
+        console.log("list", list);
+      })
+    );
+  }
 
   return (
     <>
@@ -91,6 +108,7 @@ const TaskItem = ({ chatList }: any) => {
             {todos.items &&
               todos.items.map((doc, todosIndex) => (
                 <List
+                  onClick={() => openModal(doc.id)}
                   key={todosIndex}
                   draggable
                   onDragEnter={
@@ -101,10 +119,18 @@ const TaskItem = ({ chatList }: any) => {
                   onDragStart={e =>
                     handleDragStart(e, { chatIndex, todosIndex })
                   }
+                  onDragEnd={handleDragEnd02}
                   data-id={doc.id}
                   className="my-2 px-5 py-5 border-4 border-light-blue-500 border-opacity-25"
                 >
-                  <a>{doc.message}</a>
+                  <p>{doc.message}</p>
+                  <Modal
+                    show={show}
+                    setShow={setShow}
+                    doc={doc}
+                    docId={doc.id}
+                    modalId={modalId}
+                  />
                 </List>
               ))}
           </Board>
