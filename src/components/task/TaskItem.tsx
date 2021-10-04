@@ -1,7 +1,8 @@
 import { useState, useRef } from "react";
 import firebase from "../../firebase/clientApp";
 import styled from 'styled-components';
-import Modal from "./Modal";
+import Modal from "../Modal";
+import { useCollection } from "react-firebase-hooks/firestore";
 
 const Board = styled.div`
   padding: 10px;
@@ -24,6 +25,8 @@ const List = styled.div`
 const TaskItem = ({ chatList }: any) => {
   const db = firebase.firestore();
   const [dragging, setDragging] = useState(false);
+  const [modalId, setModalId] = useState(0);
+  const [show, setShow] = useState(false);
   const dragItem = useRef();
   const dragNode = useRef();
   const [list, setList] = useState([
@@ -31,6 +34,15 @@ const TaskItem = ({ chatList }: any) => {
     chatList?.docs[1].data(),
     chatList?.docs[2].data(),
   ]);
+  const [chatListBlock, chatListBlockLoading, chatListBlockError] = useCollection(
+    db.collection("chatList"),
+    {}
+  );
+
+  const openModal = doc => {
+    setShow(true);
+    setModalId(doc);
+  };
 
   const handleDragStart = (e, params) => {
     console.log("drag start", params);
