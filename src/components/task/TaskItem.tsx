@@ -1,19 +1,19 @@
 import { useState, useRef } from "react";
 import firebase from "../../firebase/clientApp";
 import styled from 'styled-components';
-import Modal from "../Modal";
 import { useCollection } from "react-firebase-hooks/firestore";
+import Modal from "../Modal";
 
 const Board = styled.div`
   padding: 10px;
   width: 300px;
-  background: #0f5779;
+  background: #ebecf0;
   border-radius: 5px;
 `;
 
 const Title = styled.h1`
   font-size: 18px;
-  color: #fff;
+  color: #333;
   font-weight: 700;
 `;
 
@@ -42,6 +42,13 @@ const TaskItem = ({ chatList }: any) => {
   const openModal = doc => {
     setShow(true);
     setModalId(doc);
+    console.log('show', show);
+  };
+
+  const closeModal = () => {
+    setShow(false);
+    console.log("test");
+    console.log("show", show);
   };
 
   const handleDragStart = (e, params) => {
@@ -119,23 +126,24 @@ const TaskItem = ({ chatList }: any) => {
             <Title>{todos.title}</Title>
             {todos.items &&
               todos.items.map((doc, todosIndex) => (
-                <List
-                  onClick={() => openModal(doc.id)}
-                  key={todosIndex}
-                  draggable
-                  onDragEnter={
-                    dragging
-                      ? e => handleDragEnter(e, { chatIndex, todosIndex })
-                      : null
-                  }
-                  onDragStart={e =>
-                    handleDragStart(e, { chatIndex, todosIndex })
-                  }
-                  onDragEnd={handleDragEnd02}
-                  data-id={doc.id}
-                  className="my-2 px-5 py-5 border-4 border-light-blue-500 border-opacity-25"
-                >
-                  <p>{doc.message}</p>
+                <div key={todosIndex}>
+                  <List
+                    onClick={() => openModal(doc.id)}
+                    draggable
+                    onDragEnter={
+                      dragging
+                        ? e => handleDragEnter(e, { chatIndex, todosIndex })
+                        : null
+                    }
+                    onDragStart={e =>
+                      handleDragStart(e, { chatIndex, todosIndex })
+                    }
+                    onDragEnd={handleDragEnd02}
+                    data-id={doc.id}
+                    className="my-2 px-5 py-5"
+                  >
+                    <p>{doc.message}</p>
+                  </List>
                   <Modal
                     show={show}
                     setShow={setShow}
@@ -143,7 +151,7 @@ const TaskItem = ({ chatList }: any) => {
                     docId={doc.id}
                     modalId={modalId}
                   />
-                </List>
+                </div>
               ))}
           </Board>
         ))}

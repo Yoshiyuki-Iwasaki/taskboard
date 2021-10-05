@@ -15,7 +15,7 @@ interface Todo {
 }
 
 const Main = styled.div`
-  margin: 30px auto 0;
+  margin: 30px auto;
   display: flex;
   justify-content: space-between;
   width: 1000px;
