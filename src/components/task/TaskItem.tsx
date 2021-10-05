@@ -20,6 +20,7 @@ const Title = styled.h1`
 const List = styled.div`
   background: #fff;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 const TaskItem = ({ chatList }: any) => {
@@ -29,7 +30,7 @@ const TaskItem = ({ chatList }: any) => {
   const [show, setShow] = useState(false);
   const dragItem = useRef();
   const dragNode = useRef();
-  const [chatListBlock, chatListBlockLoading, chatListBlockError] = useCollection(
+  const [data, loading, error] = useCollection(
     db.collection("chatList"),
     {}
   );
@@ -93,7 +94,7 @@ const TaskItem = ({ chatList }: any) => {
     docRef03.update({ items: list[2].items });
     console.log(
       "docRef",
-      chatListBlock.docs.map(doc => {
+      data.docs.map(doc => {
         console.log("doc.data()", doc.data());
       })
     );
@@ -103,6 +104,14 @@ const TaskItem = ({ chatList }: any) => {
         console.log("list", list);
       })
     );
+  }
+
+  if (loading) {
+    return <h6>Loading...</h6>;
+  }
+
+  if (error) {
+    return null;
   }
 
   return (
