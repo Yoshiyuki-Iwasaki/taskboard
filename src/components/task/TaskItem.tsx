@@ -22,7 +22,7 @@ const List = styled.div`
   border-radius: 5px;
 `;
 
-const TaskItem = ({chatList }: any) => {
+const TaskItem = ({ chatList }: any) => {
   const db = firebase.firestore();
   const [dragging, setDragging] = useState(false);
   const [modalId, setModalId] = useState(0);
