@@ -22,33 +22,27 @@ const List = styled.div`
   border-radius: 5px;
 `;
 
-const TaskItem = ({ chatList }: any) => {
+const TaskItem = ({chatList }: any) => {
   const db = firebase.firestore();
   const [dragging, setDragging] = useState(false);
   const [modalId, setModalId] = useState(0);
   const [show, setShow] = useState(false);
   const dragItem = useRef();
   const dragNode = useRef();
+  const [chatListBlock, chatListBlockLoading, chatListBlockError] = useCollection(
+    db.collection("chatList"),
+    {}
+  );
   const [list, setList] = useState([
     chatList?.docs[0].data(),
     chatList?.docs[1].data(),
     chatList?.docs[2].data(),
   ]);
-  const [chatListBlock, chatListBlockLoading, chatListBlockError] = useCollection(
-    db.collection("chatList"),
-    {}
-  );
 
   const openModal = doc => {
     setShow(true);
     setModalId(doc);
     console.log('show', show);
-  };
-
-  const closeModal = () => {
-    setShow(false);
-    console.log("test");
-    console.log("show", show);
   };
 
   const handleDragStart = (e, params) => {

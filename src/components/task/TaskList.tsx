@@ -34,6 +34,13 @@ const TaskList = () => {
     db.collection("chatList"),
     {}
   );
+  const [list, setList] = useState([
+    chatList?.docs[0].data(),
+    chatList?.docs[1].data(),
+    chatList?.docs[2].data(),
+  ]);
+
+  console.log('list', list);
 
   useEffect(() => {
     (async () => {
@@ -77,7 +84,7 @@ const TaskList = () => {
     <>
       <TaskInput text={text} setText={setText} handleSubmit={handleSubmit} />
       <Main>
-        <TaskItem db={db} chatList={chatList} />
+        <TaskItem chatList={chatList} />
       </Main>
     </>
   );
