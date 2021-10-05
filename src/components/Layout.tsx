@@ -2,7 +2,12 @@ import Header from "./Header";
 import Auth from "./Auth";
 import firebase from "../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
+import styled from "styled-components";
 
+const Main = styled.main`
+  background: #0f5779;
+  height: calc(100vh - 80px);
+`;
 const Layout = ({ children }:any) => {
   const [user, loading, error] = useAuthState(firebase.auth());
 
@@ -16,7 +21,7 @@ const Layout = ({ children }:any) => {
   return (
     <>
       <Header />
-      {!user ? <Auth /> : <>{children}</>}
+      <Main>{!user ? <Auth /> : <>{children}</>}</Main>
     </>
   );
 };

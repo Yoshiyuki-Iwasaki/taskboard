@@ -2,7 +2,7 @@ import React from 'react'
 
 const taskInput = ({ handleSubmit, text, setText }:any) => {
   return (
-    <form onSubmit={e => handleSubmit(e)} className="mt-5	text-center">
+    <form onSubmit={e => handleSubmit(e)} className="py-5 text-center">
       <input
         type="text"
         value={text}
