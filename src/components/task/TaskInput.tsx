@@ -1,6 +1,45 @@
-import React from 'react'
+import React, { useState } from "react";
 
-const taskInput = ({ handleSubmit, text, setText }:any) => {
+interface Todo {
+  id: number;
+  message: string;
+  userId: string;
+  createdAt: string;
+}
+
+const taskInput = ({
+  chatList,
+  text,
+  setText,
+  todos,
+  setTodos,
+  setIsChangedTodo,
+  user,
+}: any) => {
+  const convertJST = new Date();
+  convertJST.setHours(convertJST.getHours());
+  const updatedTime = convertJST.toLocaleString("ja-JP").slice(0, -3);
+  const [list, setList] = useState([
+    chatList?.docs[0].data(),
+    chatList?.docs[1].data(),
+    chatList?.docs[2].data(),
+  ]);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (!text) return;
+    setIsChangedTodo(true);
+    const newTodo: Todo = {
+      id: new Date().getTime(),
+      message: text,
+      userId: user.uid,
+      createdAt: updatedTime,
+    };
+    list[0].items.push(newTodo);
+    setTodos([...todos, newTodo]);
+    setText("");
+  };
+
   return (
     <form onSubmit={e => handleSubmit(e)} className="py-5 text-center">
       <input

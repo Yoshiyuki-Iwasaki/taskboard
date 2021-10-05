@@ -10,7 +10,6 @@ interface Todo {
   id: number;
   message: string;
   userId: string;
-  state: string;
   createdAt: string;
 }
 
@@ -27,20 +26,10 @@ const TaskList = () => {
   const [user, loading, error] = useAuthState(firebase.auth());
   const [todos, setTodos] = useState<Todo[]>([]);
   const [isChangedTodo, setIsChangedTodo] = useState(false);
-  const convertJST = new Date();
-  convertJST.setHours(convertJST.getHours());
-  const updatedTime = convertJST.toLocaleString("ja-JP").slice(0, -3);
   const [chatList, chatListLoading, chatListError] = useCollection(
     db.collection("chatList"),
     {}
   );
-  const [list, setList] = useState([
-    chatList?.docs[0].data(),
-    chatList?.docs[1].data(),
-    chatList?.docs[2].data(),
-  ]);
-
-  console.log('list', list);
 
   useEffect(() => {
     (async () => {
@@ -58,21 +47,6 @@ const TaskList = () => {
     }
   }, [todos, isChangedTodo, db]);
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (!text) return;
-    setIsChangedTodo(true);
-    const newTodo: Todo = {
-      id: new Date().getTime(),
-      message: text,
-      userId: user.uid,
-      createdAt: updatedTime,
-    };
-    list[0].items.push(newTodo);
-    setTodos([...todos, newTodo]);
-    setText("");
-  };
-
   if (loading || chatListLoading) {
     return <h6>Loading...</h6>;
   }
@@ -82,7 +56,15 @@ const TaskList = () => {
 
   return (
     <>
-      <TaskInput text={text} setText={setText} handleSubmit={handleSubmit} />
+      <TaskInput
+        chatList={chatList}
+        text={text}
+        setText={setText}
+        todos={todos}
+        setTodos={setTodos}
+        setIsChangedTodo={setIsChangedTodo}
+        user={user}
+      />
       <Main>
         <TaskItem chatList={chatList} />
       </Main>
