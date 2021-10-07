@@ -23,7 +23,7 @@ const Header = () => {
           </Link>
         </h1>
         <div className="w-48 flex justify-between	items-center">
-          {user.displayName && <p>{user.displayName}</p>}
+          {/* {user.displayName && <p>{user.displayName}</p>} */}
           <button
             onClick={() => logout()}
             className="bg-gray-500 text-white font-medium p-4"

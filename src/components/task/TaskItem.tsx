@@ -25,11 +25,11 @@ const List = styled.div`
 
 const TaskItem = ({ chatList }: any) => {
   const db = firebase.firestore();
-  const [dragging, setDragging] = useState(false);
-  const [modalId, setModalId] = useState(0);
-  const [show, setShow] = useState(false);
-  const dragItem = useRef();
-  const dragNode = useRef();
+  const [dragging, setDragging] = useState<boolean>(false);
+  const [modalId, setModalId] = useState<number>(0);
+  const [show, setShow] = useState<boolean>(false);
+  const dragItem = useRef<any>();
+  const dragNode = useRef<any>();
   const [data, loading, error] = useCollection(
     db.collection("chatList"),
     {}
@@ -44,6 +44,15 @@ const TaskItem = ({ chatList }: any) => {
     setShow(true);
     setModalId(doc);
     console.log('show', show);
+  };
+
+
+  const handleDragEnd = () => {
+    console.log("Ending drag");
+    setDragging(false);
+    dragNode.current.removeEventListener("dragend", handleDragEnd);
+    dragItem.current = null;
+    dragNode.current = null;
   };
 
   const handleDragStart = (e, params) => {
@@ -74,14 +83,6 @@ const TaskItem = ({ chatList }: any) => {
         return newList;
       });
     }
-  };
-
-  const handleDragEnd = () => {
-    console.log("Ending drag");
-    setDragging(false);
-    dragNode.current.removeEventListener("dragend", handleDragEnd);
-    dragItem.current = null;
-    dragNode.current = null;
   };
 
   const handleDragEnd02 = async () => {
