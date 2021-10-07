@@ -19,11 +19,11 @@ const taskInput = ({
   const convertJST = new Date();
   convertJST.setHours(convertJST.getHours());
   const updatedTime = convertJST.toLocaleString("ja-JP").slice(0, -3);
-  const [list, setList] = useState([
+  const list = [
     chatList?.docs[0].data(),
     chatList?.docs[1].data(),
     chatList?.docs[2].data(),
-  ]);
+  ];
 
   const handleSubmit = e => {
     e.preventDefault();

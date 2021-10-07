@@ -1,6 +1,6 @@
 # taskboard
 
-url:
+url: https://taskboard-a75c1.web.app
 
 ## 使用技術
 - TypeScript

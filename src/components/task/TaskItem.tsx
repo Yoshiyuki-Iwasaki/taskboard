@@ -20,16 +20,17 @@ const Title = styled.h1`
 const List = styled.div`
   background: #fff;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 const TaskItem = ({ chatList }: any) => {
   const db = firebase.firestore();
-  const [dragging, setDragging] = useState(false);
-  const [modalId, setModalId] = useState(0);
-  const [show, setShow] = useState(false);
-  const dragItem = useRef();
-  const dragNode = useRef();
-  const [chatListBlock, chatListBlockLoading, chatListBlockError] = useCollection(
+  const [dragging, setDragging] = useState<boolean>(false);
+  const [modalId, setModalId] = useState<number>(0);
+  const [show, setShow] = useState<boolean>(false);
+  const dragItem = useRef<any>();
+  const dragNode = useRef<any>();
+  const [data, loading, error] = useCollection(
     db.collection("chatList"),
     {}
   );
@@ -43,6 +44,15 @@ const TaskItem = ({ chatList }: any) => {
     setShow(true);
     setModalId(doc);
     console.log('show', show);
+  };
+
+
+  const handleDragEnd = () => {
+    console.log("Ending drag");
+    setDragging(false);
+    dragNode.current.removeEventListener("dragend", handleDragEnd);
+    dragItem.current = null;
+    dragNode.current = null;
   };
 
   const handleDragStart = (e, params) => {
@@ -75,14 +85,6 @@ const TaskItem = ({ chatList }: any) => {
     }
   };
 
-  const handleDragEnd = () => {
-    console.log("Ending drag");
-    setDragging(false);
-    dragNode.current.removeEventListener("dragend", handleDragEnd);
-    dragItem.current = null;
-    dragNode.current = null;
-  };
-
   const handleDragEnd02 = async () => {
     console.log("Ending drag02");
     const docRef = await db.collection("chatList").doc("block01");
@@ -93,7 +95,7 @@ const TaskItem = ({ chatList }: any) => {
     docRef03.update({ items: list[2].items });
     console.log(
       "docRef",
-      chatListBlock.docs.map(doc => {
+      data.docs.map(doc => {
         console.log("doc.data()", doc.data());
       })
     );
@@ -103,6 +105,14 @@ const TaskItem = ({ chatList }: any) => {
         console.log("list", list);
       })
     );
+  }
+
+  if (loading) {
+    return <h6>Loading...</h6>;
+  }
+
+  if (error) {
+    return null;
   }
 
   return (
