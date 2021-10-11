@@ -47,20 +47,32 @@ const Overlay = styled.div`
 `;
 
 
-const Modal = ({ show, setShow, doc, docId, modalId }) => {
+const Modal = ({
+  todos,
+  show,
+  setShow,
+  doc,
+  docId,
+  modalId,
+  params,
+  chatList,
+}) => {
   const db = firebase.firestore();
   const closeModal = () => {
     setShow(false);
   };
 
-  const clickRemoveLikeButton = async (): Promise<any> => {
-    const citiesRef = await db.collection("chatList").get();
-    citiesRef.forEach((postDoc) => {
-      console.log("postDoc.id", postDoc.id);
-    });
+  const clickRemoveLikeButton = async (params): Promise<any> => {
+    db.collection("chatList")
+      .doc(chatList?.docs[params.chatIndex].id)
+      .update({
+        items: firebase.firestore.FieldValue.arrayRemove(
+          chatList?.docs[params.chatIndex].data().items[params.todosIndex]
+        ),
+      });
+    todos.items.splice(params.todosIndex, 1);
+    setShow(false);
   };
-
-  console.log("doc", doc);
 
   return (
     <>
@@ -74,7 +86,7 @@ const Modal = ({ show, setShow, doc, docId, modalId }) => {
             <Body>
               <LeftArea></LeftArea>
               <RightArea>
-                <RightAreaButton onClick={() => clickRemoveLikeButton()}>
+                <RightAreaButton onClick={() => clickRemoveLikeButton(params)}>
                   削除
                 </RightAreaButton>
               </RightArea>
