@@ -17,7 +17,16 @@ const Title = styled.h1`
   font-weight: 700;
 `;
 
+const Wrapper = styled.div`
+  margin-top: 10px;
+
+  &::first-child{
+    margin-top: 0;
+  }
+`;
+
 const List = styled.div`
+  padding: 10px;
   background: #fff;
   border-radius: 5px;
   cursor: pointer;
@@ -117,7 +126,7 @@ const TaskItem = ({ chatList }: any) => {
             <Title>{todos.title}</Title>
             {todos.items &&
               todos.items.map((doc, todosIndex) => (
-                <div key={todosIndex}>
+                <Wrapper key={todosIndex}>
                   <List
                     onClick={() => openModal(doc.id, { chatIndex, todosIndex })}
                     draggable
@@ -131,7 +140,6 @@ const TaskItem = ({ chatList }: any) => {
                     }
                     onDragEnd={handleDragEnd02}
                     data-id={doc.id}
-                    className="my-2 px-5 py-5"
                   >
                     <p>{doc.message}</p>
                   </List>
@@ -145,7 +153,7 @@ const TaskItem = ({ chatList }: any) => {
                     docId={doc.id}
                     modalId={modalId}
                   />
-                </div>
+                </Wrapper>
               ))}
           </Board>
         ))}
