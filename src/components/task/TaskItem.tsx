@@ -40,10 +40,9 @@ const TaskItem = ({ chatList }: any) => {
     chatList?.docs[2].data(),
   ]);
 
-  const openModal = doc => {
+  const openModal = (doc, params) => {
     setShow(true);
     setModalId(doc);
-    console.log('show', show);
   };
 
 
@@ -93,18 +92,6 @@ const TaskItem = ({ chatList }: any) => {
     docRef02.update({ items: list[1].items });
     const docRef03 = await db.collection("chatList").doc("block03");
     docRef03.update({ items: list[2].items });
-    console.log(
-      "docRef",
-      data.docs.map(doc => {
-        console.log("doc.data()", doc.data());
-      })
-    );
-    console.log(
-      "list",
-      list.map(list => {
-        console.log("list", list);
-      })
-    );
   }
 
   if (loading) {
@@ -132,7 +119,7 @@ const TaskItem = ({ chatList }: any) => {
               todos.items.map((doc, todosIndex) => (
                 <div key={todosIndex}>
                   <List
-                    onClick={() => openModal(doc.id)}
+                    onClick={() => openModal(doc.id, { chatIndex, todosIndex })}
                     draggable
                     onDragEnter={
                       dragging
@@ -149,6 +136,9 @@ const TaskItem = ({ chatList }: any) => {
                     <p>{doc.message}</p>
                   </List>
                   <Modal
+                    todos={todos}
+                    chatList={chatList}
+                    params={{ chatIndex, todosIndex }}
                     show={show}
                     setShow={setShow}
                     doc={doc}
