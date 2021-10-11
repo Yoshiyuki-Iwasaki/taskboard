@@ -46,7 +46,6 @@ const Overlay = styled.div`
   z-index: 10;
 `;
 
-
 const Modal = ({
   todos,
   show,
