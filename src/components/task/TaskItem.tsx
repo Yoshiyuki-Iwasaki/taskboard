@@ -1,8 +1,17 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import firebase from "../../firebase/clientApp";
 import styled from 'styled-components';
 import { useCollection } from "react-firebase-hooks/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
 import Modal from "../Modal";
+import TaskInput from "./TaskInput";
+
+interface Todo {
+  id: number;
+  message: string;
+  userId: string;
+  createdAt: string;
+}
 
 const Board = styled.div`
   padding: 10px;
@@ -34,15 +43,15 @@ const List = styled.div`
 
 const TaskItem = ({ chatList }: any) => {
   const db = firebase.firestore();
+  const [text, setText] = useState("");
+  const [open, setOpen] = useState(-1);
   const [dragging, setDragging] = useState<boolean>(false);
   const [modalId, setModalId] = useState<number>(0);
   const [show, setShow] = useState<boolean>(false);
+  const [user, loading, error] = useAuthState(firebase.auth());
+  const [todoList, setTodoList] = useState<Todo[]>([]);
   const dragItem = useRef<any>();
   const dragNode = useRef<any>();
-  const [data, loading, error] = useCollection(
-    db.collection("chatList"),
-    {}
-  );
   const [list, setList] = useState([
     chatList?.docs[0].data(),
     chatList?.docs[1].data(),
@@ -53,7 +62,6 @@ const TaskItem = ({ chatList }: any) => {
     setShow(true);
     setModalId(doc);
   };
-
 
   const handleDragEnd = () => {
     console.log("Ending drag");
@@ -102,6 +110,11 @@ const TaskItem = ({ chatList }: any) => {
     const docRef03 = await db.collection("chatList").doc("block03");
     docRef03.update({ items: list[2].items });
   }
+
+  const handleClick = chatIndex => {
+    setOpen(chatIndex);
+    setText("");
+  };
 
   if (loading) {
     return <h6>Loading...</h6>;
@@ -155,6 +168,21 @@ const TaskItem = ({ chatList }: any) => {
                   />
                 </Wrapper>
               ))}
+            <button onClick={() => handleClick(chatIndex)}>Button</button>
+            {chatIndex == open && (
+              <TaskInput
+                chatIndex={chatIndex}
+                chatList={chatList}
+                text={text}
+                setText={setText}
+                todos={todos}
+                todoList={todoList}
+                setTodoList={setTodoList}
+                list={list}
+                setList={setList}
+                user={user}
+              />
+            )}
           </Board>
         ))}
     </>

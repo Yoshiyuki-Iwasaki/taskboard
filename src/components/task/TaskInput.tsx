@@ -1,4 +1,6 @@
-import styled from 'styled-components';
+import { useState, useRef, useEffect } from "react";
+import styled from "styled-components";
+import firebase from "../../firebase/clientApp";
 
 interface Todo {
   id: number;
@@ -12,25 +14,36 @@ const Form = styled.form`
   text-align: center;
 `;
 
-const taskInput = ({
+const TaskInput = ({
+  chatIndex,
   chatList,
   text,
   setText,
   todos,
-  setTodos,
-  setIsChangedTodo,
+  todoList,
+  setTodoList,
+  list,
+  setList,
   user,
 }: any) => {
+  const db = firebase.firestore();
   const convertJST = new Date();
   convertJST.setHours(convertJST.getHours());
   const updatedTime = convertJST.toLocaleString("ja-JP").slice(0, -3);
-  const list = [
-    chatList?.docs[0].data(),
-    chatList?.docs[1].data(),
-    chatList?.docs[2].data(),
-  ];
+  const [isChangedTodo, setIsChangedTodo] = useState(false);
 
-  const handleSubmit = e => {
+  useEffect(() => {
+    if (isChangedTodo) {
+      (async () => {
+        const docRef = await db
+          .collection("chatList")
+          .doc(`block0${chatIndex + 1}`);
+        docRef.update({ items: todos.items });
+      })();
+    }
+  }, [isChangedTodo, db]);
+
+  const handleSubmit = (e, chatIndex) => {
     e.preventDefault();
     if (!text) return;
     setIsChangedTodo(true);
@@ -40,17 +53,22 @@ const taskInput = ({
       userId: user.uid,
       createdAt: updatedTime,
     };
-    list[0].items.push(newTodo);
-    setTodos([...todos, newTodo]);
+    list[chatIndex].items.push(newTodo);
+    setTodoList([...todos.items, newTodo]);
     setText("");
   };
 
   return (
-    <Form onSubmit={e => handleSubmit(e)}>
+    <Form onSubmit={e => handleSubmit(e, chatIndex)}>
       <input type="text" value={text} onChange={e => setText(e.target.value)} />
-      <input type="submit" value="追加" onClick={e => handleSubmit(e)} />
+      <input
+        type="submit"
+        value="追加"
+        onClick={e => handleSubmit(e, chatIndex)}
+      />
+      {chatIndex}
     </Form>
   );
 };
 
-export default taskInput
+export default TaskInput;
