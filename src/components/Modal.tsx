@@ -5,6 +5,7 @@ const Header = styled.div`
 `;
 
 const Main = styled.div`
+  padding: 20px 30px;
   position: fixed;
   background: #fff;
   width: 768px;
@@ -22,18 +23,41 @@ const Button = styled.button`
 `;
 
 const Title = styled.p`
-  margin: 20px 40px 8px 56px;
-  font-size: 20px;
+  font-size: 26px;
   line-height: 24px;
+  font-weight: 700;
 `;
 
-const Body = styled.div``;
+const Body = styled.div`
+  margin-top: 30px;
+  display: flex;
+`;
 
-const LeftArea = styled.div``;
+const LeftArea = styled.div`
+  width: 80%;
+`;
 
-const RightArea = styled.div``;
+console.log('test');
 
-const RightAreaButton = styled.div``;
+const LeftAreaComment = styled.p`
+  font-size: 16px;
+`;
+
+const LeftAreaInput = styled.textarea`
+  font-size: 14px;
+`;
+
+const RightArea = styled.div`
+  width: 20%;
+`;
+
+const RightAreaButton = styled.div`
+  padding: 15px;
+  background: red;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 700;
+`;
 
 const Overlay = styled.div`
   position: fixed;
@@ -83,7 +107,10 @@ const Modal = ({
               <Button onClick={() => closeModal()}>閉じる</Button>
             </Header>
             <Body>
-              <LeftArea></LeftArea>
+              <LeftArea>
+                <LeftAreaComment>コメント</LeftAreaComment>
+                <LeftAreaInput type="text" />
+              </LeftArea>
               <RightArea>
                 <RightAreaButton onClick={() => clickRemoveLikeButton(params)}>
                   削除
