@@ -62,13 +62,12 @@ const TaskItem = ({ chatList }: any) => {
     chatList?.docs[2].data(),
   ]);
 
-  const openModal = (doc, params) => {
+  const openModal = (doc) => {
     setShow(true);
     setModalId(doc);
   };
 
   const handleDragEnd = () => {
-    console.log("Ending drag");
     setDragging(false);
     dragNode.current.removeEventListener("dragend", handleDragEnd);
     dragItem.current = null;
@@ -105,17 +104,16 @@ const TaskItem = ({ chatList }: any) => {
     }
   };
 
-  const handleDragEnd02 = async () => {
-    console.log("Ending drag02");
+  const UpdateDragData = async () => {
     const docRef = await db.collection("chatList").doc("block01");
     docRef.update({ items: list[0].items });
     const docRef02 = await db.collection("chatList").doc("block02");
     docRef02.update({ items: list[1].items });
     const docRef03 = await db.collection("chatList").doc("block03");
     docRef03.update({ items: list[2].items });
-  }
+  };
 
-  const handleClick = chatIndex => {
+  const openInputField = chatIndex => {
     setOpen(chatIndex);
     setText("");
   };
@@ -155,7 +153,7 @@ const TaskItem = ({ chatList }: any) => {
                     onDragStart={e =>
                       handleDragStart(e, { chatIndex, todosIndex })
                     }
-                    onDragEnd={handleDragEnd02}
+                    onDragEnd={UpdateDragData}
                     data-id={doc.id}
                   >
                     <p>{doc.message}</p>
