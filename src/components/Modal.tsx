@@ -52,7 +52,7 @@ const RightArea = styled.div`
 `;
 
 const RightAreaButton = styled.div`
-  padding: 15px;
+  padding: 8px 15px;
   background: red;
   font-size: 14px;
   color: #fff;
@@ -108,6 +108,8 @@ const Modal = ({
             </Header>
             <Body>
               <LeftArea>
+                <LeftAreaComment>カテゴリー</LeftAreaComment>
+                <LeftAreaInput type="text" />
                 <LeftAreaComment>コメント</LeftAreaComment>
                 <LeftAreaInput type="text" />
               </LeftArea>

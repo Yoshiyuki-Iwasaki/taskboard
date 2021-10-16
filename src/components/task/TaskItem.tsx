@@ -41,6 +41,10 @@ const List = styled.div`
   cursor: pointer;
 `;
 
+const Button = styled.button`
+  padding: 10px;
+`;
+
 const TaskItem = ({ chatList }: any) => {
   const db = firebase.firestore();
   const [text, setText] = useState("");
@@ -168,7 +172,9 @@ const TaskItem = ({ chatList }: any) => {
                   />
                 </Wrapper>
               ))}
-            <button onClick={() => handleClick(chatIndex)}>Button</button>
+            <Button onClick={() => handleClick(chatIndex)}>
+              カードを追加する
+            </Button>
             {chatIndex == open && (
               <TaskInput
                 chatIndex={chatIndex}
