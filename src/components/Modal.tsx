@@ -39,7 +39,7 @@ const LeftArea = styled.div`
 
 console.log('test');
 
-const LeftAreaComment = styled.p`
+const LeftAreaTitle = styled.p`
   font-size: 16px;
 `;
 
@@ -85,7 +85,7 @@ const Modal = ({
     setShow(false);
   };
 
-  const clickRemoveLikeButton = async (params): Promise<any> => {
+  const removeModalButton = async (params): Promise<any> => {
     db.collection("chatList")
       .doc(chatList?.docs[params.chatIndex].id)
       .update({
@@ -108,13 +108,13 @@ const Modal = ({
             </Header>
             <Body>
               <LeftArea>
-                <LeftAreaComment>カテゴリー</LeftAreaComment>
+                <LeftAreaTitle>カテゴリー</LeftAreaTitle>
                 <LeftAreaInput type="text" />
-                <LeftAreaComment>コメント</LeftAreaComment>
+                <LeftAreaTitle>コメント</LeftAreaTitle>
                 <LeftAreaInput type="text" />
               </LeftArea>
               <RightArea>
-                <RightAreaButton onClick={() => clickRemoveLikeButton(params)}>
+                <RightAreaButton onClick={() => removeModalButton(params)}>
                   削除
                 </RightAreaButton>
               </RightArea>
