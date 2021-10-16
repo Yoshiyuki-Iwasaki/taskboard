@@ -66,7 +66,6 @@ const TaskInput = ({
         value="追加"
         onClick={e => handleSubmit(e, chatIndex)}
       />
-      {chatIndex}
     </Form>
   );
 };
