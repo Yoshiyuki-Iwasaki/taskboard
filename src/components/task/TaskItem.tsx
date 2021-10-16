@@ -13,7 +13,7 @@ interface Todo {
 }
 
 const Board = styled.div`
-  padding: 10px;
+  padding: 15px 10px;
   width: 300px;
   background: #ebecf0;
   border-radius: 5px;
@@ -167,22 +167,20 @@ const TaskItem = ({ chatList }: any) => {
                   />
                 </Wrapper>
               ))}
-            <Button onClick={() => handleClick(chatIndex)}>
-              カードを追加する
-            </Button>
-            {chatIndex == open && (
+            {chatIndex == open ? (
               <TaskInput
                 chatIndex={chatIndex}
-                chatList={chatList}
                 text={text}
                 setText={setText}
                 todos={todos}
-                todoList={todoList}
                 setTodoList={setTodoList}
                 list={list}
-                setList={setList}
                 user={user}
               />
+            ) : (
+              <Button onClick={() => openInputField(chatIndex)}>
+                カードを追加する
+              </Button>
             )}
           </Board>
         ))}
