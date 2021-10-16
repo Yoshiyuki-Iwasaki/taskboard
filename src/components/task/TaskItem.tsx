@@ -1,7 +1,6 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import firebase from "../../firebase/clientApp";
 import styled from 'styled-components';
-import { useCollection } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Modal from "../Modal";
 import TaskInput from "./TaskInput";
@@ -75,7 +74,6 @@ const TaskItem = ({ chatList }: any) => {
   };
 
   const handleDragStart = (e, params) => {
-    console.log("drag start", params);
     dragItem.current = params;
     dragNode.current = e.target;
     dragNode.current.addEventListener("dragend", handleDragEnd);
@@ -85,7 +83,6 @@ const TaskItem = ({ chatList }: any) => {
   };
 
   const handleDragEnter = async (e, params) => {
-    console.log("Entering drag...", params);
     const currentItem = dragItem.current;
     if (e.target !== dragNode.current) {
       setList(list => {
@@ -143,7 +140,7 @@ const TaskItem = ({ chatList }: any) => {
               todos.items.map((doc, todosIndex) => (
                 <Wrapper key={todosIndex}>
                   <List
-                    onClick={() => openModal(doc.id, { chatIndex, todosIndex })}
+                    onClick={() => openModal(doc.id)}
                     draggable
                     onDragEnter={
                       dragging

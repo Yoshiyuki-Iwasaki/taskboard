@@ -13,17 +13,20 @@ const Form = styled.form`
   padding: 10px 0;
   text-align: center;
 `;
+const Input = styled.input`
+  padding: 10px;
+  background: rgb(255, 255, 255);
+  border-radius: 5px;
+  width: 100%;
+`;
 
 const TaskInput = ({
   chatIndex,
-  chatList,
   text,
   setText,
   todos,
-  todoList,
   setTodoList,
   list,
-  setList,
   user,
 }: any) => {
   const db = firebase.firestore();
@@ -60,12 +63,7 @@ const TaskInput = ({
 
   return (
     <Form onSubmit={e => handleSubmit(e, chatIndex)}>
-      <input type="text" value={text} onChange={e => setText(e.target.value)} />
-      <input
-        type="submit"
-        value="追加"
-        onClick={e => handleSubmit(e, chatIndex)}
-      />
+      <Input type="text" value={text} onChange={e => setText(e.target.value)} />
     </Form>
   );
 };
