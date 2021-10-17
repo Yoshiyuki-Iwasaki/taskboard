@@ -133,13 +133,17 @@ const LeftArea = styled.div`
 `;
 
 const LeftAreaTitle = styled.p`
+  margin-bottom: 5px;
   font-size: 16px;
 `;
 
 const LeftAreaForm = styled.form`
+  margin-bottom: 10px;
 `;
 
 const LeftAreaInput = styled.input`
+  padding: 5px;
+  border: 1px solid #333;
   font-size: 14px;
 `;
 
