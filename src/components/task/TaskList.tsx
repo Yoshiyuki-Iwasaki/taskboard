@@ -3,14 +3,6 @@ import firebase from "../../firebase/clientApp";
 import TaskItem from './TaskItem';
 import styled from 'styled-components';
 
-const Main = styled.div`
-  margin: 0 auto;
-  padding-top: 30px;
-  display: flex;
-  justify-content: space-between;
-  width: 1000px;
-`;
-
 const TaskList = () => {
   const db = firebase.firestore();
   const [chatList, loading, error] = useCollection(
@@ -35,5 +27,13 @@ const TaskList = () => {
     </>
   );
 };
+
+const Main = styled.div`
+  margin: 0 auto;
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  width: 1000px;
+`;
 
 export default TaskList;

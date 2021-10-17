@@ -8,6 +8,14 @@ const uiConfig = {
   signInOptions: [firebase.auth.TwitterAuthProvider.PROVIDER_ID],
 };
 
+const Auth = () => {
+  return (
+    <Main>
+      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+    </Main>
+  );
+};
+
 const Main = styled.div`
   position: fixed;
   padding: 15px;
@@ -16,13 +24,5 @@ const Main = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 `;
-
-const Auth = () => {
-  return (
-    <Main>
-      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-    </Main>
-  );
-};
 
 export default Auth;

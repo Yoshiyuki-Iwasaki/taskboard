@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import firebase from "../../firebase/clientApp";
-
 interface Todo {
   id: number;
   message: string;
@@ -10,6 +9,7 @@ interface Todo {
 }
 
 const Form = styled.form`
+  margin-top: 20px;
   padding: 10px 0;
   text-align: center;
 `;
