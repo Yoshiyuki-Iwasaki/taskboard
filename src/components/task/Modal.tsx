@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useCollection } from "react-firebase-hooks/firestore";
+import { useState } from "react";
 import styled from "styled-components";
-import firebase from "../firebase/clientApp";
+import firebase from "../../firebase/clientApp";
 
 const Modal = ({
   todos,
@@ -12,9 +13,18 @@ const Modal = ({
   params,
   chatList,
 }) => {
-  const [category, setCategory] = useState<string>('');
-  const [comment, setComment] = useState<string>('');
+  const [category, setCategory] = useState<string>("");
+  const [comment, setComment] = useState<string>("");
   const db = firebase.firestore();
+  const [commentList, loading, error] = useCollection(
+    db.collection("comment").where("postId", "==", docId),
+    {}
+  );
+  const [categoryList, categoryListLoading, categoryListError] = useCollection(
+    db.collection("category").where("postId", "==", docId),
+    {}
+  );
+
   const closeModal = () => {
     setShow(false);
   };
@@ -55,6 +65,14 @@ const Modal = ({
     setComment("");
   };
 
+  if (loading || categoryListLoading) {
+    return <h6>Loading...</h6>;
+  }
+
+  if (error || categoryListError) {
+    return null;
+  }
+
   return (
     <>
       {docId == modalId && show ? (
@@ -66,22 +84,36 @@ const Modal = ({
             </Header>
             <Body>
               <LeftArea>
-                <LeftAreaTitle>カテゴリー</LeftAreaTitle>
-                <LeftAreaForm onSubmit={e => SubmitCategory(e)}>
-                  <LeftAreaInput
-                    type="text"
-                    value={category}
-                    onChange={e => setCategory(e.target.value)}
-                  />
-                </LeftAreaForm>
-                <LeftAreaTitle>コメント</LeftAreaTitle>
-                <LeftAreaForm onSubmit={e => SubmitComment(e)}>
-                  <LeftAreaInput
-                    type="text"
-                    value={comment}
-                    onChange={e => setComment(e.target.value)}
-                  />
-                </LeftAreaForm>
+                <LeftAreaList>
+                  {categoryList.docs.map((data, index) => (
+                    <LeftAreaListItem key={index}>
+                      {data.data().category_name}
+                    </LeftAreaListItem>
+                  ))}
+                  <LeftAreaTitle>カテゴリー</LeftAreaTitle>
+                  <LeftAreaForm onSubmit={e => SubmitCategory(e)}>
+                    <LeftAreaInput
+                      type="text"
+                      value={category}
+                      onChange={e => setCategory(e.target.value)}
+                    />
+                  </LeftAreaForm>
+                </LeftAreaList>
+                <LeftAreaList>
+                  {commentList.docs.map((data, index) => (
+                    <LeftAreaListItem key={index}>
+                      {data.data().comment}
+                    </LeftAreaListItem>
+                  ))}
+                  <LeftAreaTitle>コメント</LeftAreaTitle>
+                  <LeftAreaForm onSubmit={e => SubmitComment(e)}>
+                    <LeftAreaInput
+                      type="text"
+                      value={comment}
+                      onChange={e => setComment(e.target.value)}
+                    />
+                  </LeftAreaForm>
+                </LeftAreaList>
               </LeftArea>
               <RightArea>
                 <RightAreaButton onClick={() => removeModalButton(params)}>
@@ -102,7 +134,7 @@ const Header = styled.div``;
 const Main = styled.div`
   padding: 20px 30px;
   position: fixed;
-  background: #fff;
+  background: rgb(235, 236, 240);
   width: 768px;
   min-height: 600px;
   top: 50%;
@@ -118,6 +150,10 @@ const Button = styled.button`
 `;
 
 const Title = styled.p`
+  padding: 5px;
+  background: #fff;
+  border-radius: 5px;
+  width: 65%;
   font-size: 26px;
   line-height: 24px;
   font-weight: 700;
@@ -126,20 +162,42 @@ const Title = styled.p`
 const Body = styled.div`
   margin-top: 30px;
   display: flex;
+  justify-content: space-between;
 `;
 
-const LeftArea = styled.div`
-  width: 80%;
+const LeftArea = styled.ul`
+  width: 65%;
+`;
+
+const LeftAreaList = styled.li`
+  margin-top: 50px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+`;
+
+const LeftAreaListItem = styled.div`
+  margin-top: 10px;
+  padding: 5px;
+  background: #fff;
+  border-radius: 5px;
 `;
 
 const LeftAreaTitle = styled.p`
+  margin: 15px 0 5px;
   font-size: 16px;
 `;
 
 const LeftAreaForm = styled.form`
+  margin-bottom: 10px;
 `;
 
 const LeftAreaInput = styled.input`
+  padding: 5px;
+  width: 100%;
+  height: 60px;
+  border: 1px solid #333;
   font-size: 14px;
 `;
 
@@ -166,4 +224,4 @@ const Overlay = styled.div`
   z-index: 10;
 `;
 
-export default Modal
+export default Modal;

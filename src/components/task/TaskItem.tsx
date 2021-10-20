@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import firebase from "../../firebase/clientApp";
 import styled from 'styled-components';
 import { useAuthState } from "react-firebase-hooks/auth";
-import Modal from "../Modal";
+import Modal from "./Modal";
 import TaskInput from "./TaskInput";
 
 interface Todo {
