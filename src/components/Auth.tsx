@@ -8,7 +8,7 @@ const uiConfig = {
   signInOptions: [firebase.auth.TwitterAuthProvider.PROVIDER_ID],
 };
 
-const Auth = () => {
+const Auth: React.FC = () => {
   return (
     <Main>
       <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />

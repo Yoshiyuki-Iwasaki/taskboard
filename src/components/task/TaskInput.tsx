@@ -1,26 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import firebase from "../../firebase/clientApp";
-interface Todo {
-  id: number;
-  message: string;
-  userId: string;
-  createdAt: string;
-}
+import { TaskInputType, TaskTodoType } from "../../declarations/task";
 
-const Form = styled.form`
-  margin-top: 20px;
-  padding: 10px 0;
-  text-align: center;
-`;
-const Input = styled.input`
-  padding: 10px;
-  background: rgb(255, 255, 255);
-  border-radius: 5px;
-  width: 100%;
-`;
-
-const TaskInput = ({
+const TaskInput: React.FC<TaskInputType> = ({
   chatIndex,
   text,
   setText,
@@ -28,7 +11,7 @@ const TaskInput = ({
   setTodoList,
   list,
   user,
-}: any) => {
+}) => {
   const db = firebase.firestore();
   const convertJST = new Date();
   convertJST.setHours(convertJST.getHours());
@@ -50,7 +33,7 @@ const TaskInput = ({
     e.preventDefault();
     if (!text) return;
     setIsChangedTodo(true);
-    const newTodo: Todo = {
+    const newTodo: TaskTodoType = {
       id: new Date().getTime(),
       message: text,
       userId: user.uid,
@@ -69,3 +52,16 @@ const TaskInput = ({
 };
 
 export default TaskInput;
+
+
+const Form = styled.form`
+  margin-top: 20px;
+  padding: 10px 0;
+  text-align: center;
+`;
+const Input = styled.input`
+  padding: 10px;
+  background: rgb(255, 255, 255);
+  border-radius: 5px;
+  width: 100%;
+`;

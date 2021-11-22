@@ -14,8 +14,8 @@ interface Todo {
 
 const TaskItem = ({ chatList }: any) => {
   const db = firebase.firestore();
-  const [text, setText] = useState("");
-  const [open, setOpen] = useState(-1);
+  const [text, setText] = useState<string>("");
+  const [open, setOpen] = useState<number>(-1);
   const [dragging, setDragging] = useState<boolean>(false);
   const [modalId, setModalId] = useState<number>(0);
   const [show, setShow] = useState<boolean>(false);
