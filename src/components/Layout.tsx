@@ -3,9 +3,10 @@ import Auth from "./Auth";
 import firebase from "../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
+import { LayoutType } from "../declarations/layout";
 
 
-const Layout = ({ children }:any) => {
+const Layout: React.FC<any> = ({ children }) => {
   const [user, loading, error] = useAuthState(firebase.auth());
 
   if (loading) {

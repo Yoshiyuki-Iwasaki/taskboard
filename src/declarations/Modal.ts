@@ -1,8 +1,14 @@
 /**
  * @description APIレスポンスでよく使われるオブジェクトの型
  */
-export type UserType = {
-  id: number;
-  message: string;
-  userId: number;
+
+export type ModalType = {
+  todos: any;
+  show: any;
+  setShow: any;
+  doc: any;
+  docId: number;
+  modalId: number;
+  params: any;
+  chatList: any;
 };
