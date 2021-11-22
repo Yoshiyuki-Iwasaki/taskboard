@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "npx http-server ./out",
-    "build": "next build && next export",
+    "build": "next build && next export && npx http-server ./out",
     "start": "next start",
     "lint": "next lint",
     "test": "jest"
