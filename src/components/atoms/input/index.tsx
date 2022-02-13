@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import firebase from "../../../firebase/clientApp";
-import { TaskInputType, TaskTodoType } from "../../../declarations/task";
+import { TaskInputType, TaskTodoType } from "./type";
 import { Form, Input } from "./style";
 
 const TaskInput: React.FC<TaskInputType> = ({

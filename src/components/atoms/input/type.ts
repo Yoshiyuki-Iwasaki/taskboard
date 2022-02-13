@@ -8,7 +8,6 @@ export type TaskInputType = {
   user: any;
 };
 
-
 export type TaskTodoType = {
   id: number;
   message: string;
