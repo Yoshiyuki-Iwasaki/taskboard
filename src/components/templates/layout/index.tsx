@@ -1,10 +1,9 @@
-import Header from "./Header";
-import Auth from "./Auth";
-import firebase from "../firebase/clientApp";
+import Header from "../../organisms/header";
+import Auth from "../../organisms/auth";
+import firebase from "../../../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
-import { LayoutType } from "../declarations/layout";
-
+import { LayoutType } from "../../../declarations/layout";
 
 const Layout: React.FC<any> = ({ children }) => {
   const [user, loading, error] = useAuthState(firebase.auth());

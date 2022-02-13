@@ -1,8 +1,8 @@
 import { useCollection } from "react-firebase-hooks/firestore";
 import React, { useState } from "react";
 import styled from "styled-components";
-import firebase from "../../firebase/clientApp";
-import { ModalType } from '../../declarations/Modal'
+import firebase from "../../../firebase/clientApp";
+import { ModalType } from "../../../declarations/Modal";
 
 const Modal: React.FC<ModalType> = ({
   todos,

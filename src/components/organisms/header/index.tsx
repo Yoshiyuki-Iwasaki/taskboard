@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import firebase from "../firebase/clientApp";
+import firebase from "../../../firebase/clientApp";
 import styled from "styled-components";
 import Link from "next/link";
 
