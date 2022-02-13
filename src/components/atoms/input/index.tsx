@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import styled from "styled-components";
 import firebase from "../../../firebase/clientApp";
 import { TaskInputType, TaskTodoType } from "../../../declarations/task";
+import { Form, Input } from "./style";
 
 const TaskInput: React.FC<TaskInputType> = ({
   chatIndex,
@@ -52,15 +52,3 @@ const TaskInput: React.FC<TaskInputType> = ({
 };
 
 export default TaskInput;
-
-const Form = styled.form`
-  margin-top: 20px;
-  padding: 10px 0;
-  text-align: center;
-`;
-const Input = styled.input`
-  padding: 10px;
-  background: rgb(255, 255, 255);
-  border-radius: 5px;
-  width: 100%;
-`;

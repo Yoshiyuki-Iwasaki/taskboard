@@ -1,16 +1,10 @@
 import { useState, useRef } from "react";
 import firebase from "../../../firebase/clientApp";
-import styled from "styled-components";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Modal from "../../organisms/model";
 import TaskInput from "../../atoms/input";
-
-interface Todo {
-  id: number;
-  message: string;
-  userId: string;
-  createdAt: string;
-}
+import { Board, Title, Wrapper, List, Button } from "./style";
+import { Todo } from "./type";
 
 const TaskItem = ({ chatList }: any) => {
   const db = firebase.firestore();
@@ -155,37 +149,5 @@ const TaskItem = ({ chatList }: any) => {
     </>
   );
 };
-
-const Board = styled.div`
-  padding: 15px 10px;
-  width: 300px;
-  background: #ebecf0;
-  border-radius: 5px;
-`;
-
-const Title = styled.h1`
-  font-size: 18px;
-  color: #333;
-  font-weight: 700;
-`;
-
-const Wrapper = styled.div`
-  margin-top: 10px;
-
-  &::first-child {
-    margin-top: 0;
-  }
-`;
-
-const List = styled.div`
-  padding: 10px;
-  background: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-`;
-
-const Button = styled.button`
-  padding: 10px;
-`;
 
 export default TaskItem;

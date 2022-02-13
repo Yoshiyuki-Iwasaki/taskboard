@@ -1,7 +1,7 @@
 import { useCollection } from "react-firebase-hooks/firestore";
 import firebase from "../../../firebase/clientApp";
 import TaskItem from "../../molecules/taskItem";
-import styled from "styled-components";
+import { Main } from "./style";
 
 const TaskList = () => {
   const db = firebase.firestore();
@@ -26,13 +26,5 @@ const TaskList = () => {
     </>
   );
 };
-
-const Main = styled.div`
-  margin: 0 auto;
-  padding-top: 30px;
-  display: flex;
-  justify-content: space-between;
-  width: 1000px;
-`;
 
 export default TaskList;
