@@ -1,4 +1,4 @@
-import TaskList from "../components/task/TaskList";
+import TaskList from "../components/organisms/taskList";
 import Layout from "../components/Layout";
 
 const Error = () => {
@@ -9,6 +9,6 @@ const Error = () => {
       </Layout>
     </>
   );
-}
+};
 
 export default Error;

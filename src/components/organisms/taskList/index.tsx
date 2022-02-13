@@ -1,7 +1,7 @@
 import { useCollection } from "react-firebase-hooks/firestore";
-import firebase from "../../firebase/clientApp";
-import TaskItem from './TaskItem';
-import styled from 'styled-components';
+import firebase from "../../../firebase/clientApp";
+import TaskItem from "../../molecules/taskItem";
+import styled from "styled-components";
 
 const TaskList = () => {
   const db = firebase.firestore();
