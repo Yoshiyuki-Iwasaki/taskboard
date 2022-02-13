@@ -3833,6 +3833,19 @@
   dependencies:
     "safer-buffer" ">= 2.1.2 < 3"
 
+"icony@file:../tabetai":
+  "resolved" "file:../tabetai"
+  "version" "0.1.0"
+  dependencies:
+    "google-map-react" "^2.1.10"
+    "next" "11.1.0"
+    "node-fetch" "^3.0.0"
+    "react" "17.0.2"
+    "react-dom" "17.0.2"
+    "react-infinite-scroll-component" "^6.1.0"
+    "styled-components" "^5.3.1"
+    "tailwindcss" "^2.2.8"
+
 "idb@3.0.2":
   "integrity" "sha512-+FLa/0sTXqyux0o6C+i2lOR0VoS60LU/jzUo5xjfY6+7sEEgy4Gz1O7yFBXvjd7N0NyIGWIRg8DcQSLEG+VSPw=="
   "resolved" "https://registry.npmjs.org/idb/-/idb-3.0.2.tgz"
@@ -5477,6 +5490,11 @@
   "integrity" "sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ="
   "resolved" "https://registry.npmjs.org/prelude-ls/-/prelude-ls-1.1.2.tgz"
   "version" "1.1.2"
+
+"prettier@^2.5.1":
+  "integrity" "sha512-vBZcPRUR5MZJwoyi3ZoyQlc1rXeEck8KgeC9AwwOn+exuxLxq5toTRDTSaVrXHxelDMHy9zlicw8u66yxoSUFg=="
+  "resolved" "https://registry.npmjs.org/prettier/-/prettier-2.5.1.tgz"
+  "version" "2.5.1"
 
 "pretty-format@^27.0.2", "pretty-format@^27.2.2":
   "integrity" "sha512-+DdLh+rtaElc2SQOE/YPH8k2g3Rf2OXWEpy06p8Szs3hdVSYD87QOOlYRHWAeb/59XTmeVmRKvDD0svHqf6ycA=="
