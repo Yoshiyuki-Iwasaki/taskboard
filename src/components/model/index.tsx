@@ -3,6 +3,7 @@ import { useCollection } from 'react-firebase-hooks/firestore';
 import firebase from '../../firebase/clientApp';
 import { ModalType } from './type';
 import Presenter from './presenter';
+import { useCloseModal } from './hooks';
 
 const Modal: FC<ModalType> = ({
   todos,
@@ -20,10 +21,7 @@ const Modal: FC<ModalType> = ({
     db.collection('comment').where('postId', '==', docId),
     {}
   );
-
-  const closeModal = () => {
-    setShow(false);
-  };
+  const closeModal = useCloseModal(setShow);
 
   const removeModalButton = async (params): Promise<any> => {
     db.collection('chatList')
