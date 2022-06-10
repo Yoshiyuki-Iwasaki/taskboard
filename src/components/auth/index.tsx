@@ -1,19 +1,14 @@
-import React from 'react';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import React, { FC } from 'react';
 import firebase from '../../firebase/clientApp';
-import { Main } from './style';
+import Presenter from './presenter';
 
 const uiConfig = {
   signInSuccessUrl: '/',
   signInOptions: [firebase.auth.TwitterAuthProvider.PROVIDER_ID],
 };
 
-const Auth: React.FC = () => {
-  return (
-    <Main>
-      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-    </Main>
-  );
+const Auth: FC = () => {
+  return <Presenter uiConfig={uiConfig} firebase={firebase} />;
 };
 
 export default Auth;

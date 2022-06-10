@@ -1,7 +1,6 @@
 import { useCollection } from 'react-firebase-hooks/firestore';
 import firebase from '../../firebase/clientApp';
-import TaskItem from '../taskItem';
-import { Main } from './style';
+import Presenter from './presenter';
 
 const TaskList = () => {
   const db = firebase.firestore();
@@ -18,13 +17,7 @@ const TaskList = () => {
     return null;
   }
 
-  return (
-    <>
-      <Main>
-        <TaskItem chatList={chatList} />
-      </Main>
-    </>
-  );
+  return <Presenter chatList={chatList} />;
 };
 
 export default TaskList;

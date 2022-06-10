@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import firebase from '../../firebase/clientApp';
 import { TaskInputType, TaskTodoType } from './type';
-import { Form, Input } from './style';
+import Presenter from './presenter';
 
-const TaskInput: React.FC<TaskInputType> = ({
+const TaskInput: FC<TaskInputType> = ({
   chatIndex,
   text,
   setText,
@@ -45,13 +45,12 @@ const TaskInput: React.FC<TaskInputType> = ({
   };
 
   return (
-    <Form onSubmit={(e) => handleSubmit(e, chatIndex)}>
-      <Input
-        type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-    </Form>
+    <Presenter
+      chatIndex={chatIndex}
+      text={text}
+      setText={setText}
+      handleSubmit={handleSubmit}
+    />
   );
 };
 

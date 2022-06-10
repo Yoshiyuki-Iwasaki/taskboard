@@ -1,9 +1,7 @@
-import Header from '../header';
-import Auth from '../auth';
 import firebase from '../../firebase/clientApp';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Main } from './style';
 import { LayoutType } from './type';
+import Presenter from './presenter';
 
 const Layout: React.FC<LayoutType> = ({ children }) => {
   const [user, loading, error] = useAuthState(firebase.auth());
@@ -15,12 +13,7 @@ const Layout: React.FC<LayoutType> = ({ children }) => {
   if (error) {
     return null;
   }
-  return (
-    <>
-      <Header />
-      <Main>{!user ? <Auth /> : <>{children}</>}</Main>
-    </>
-  );
+  return <Presenter user={user}>{children}</Presenter>;
 };
 
 export default Layout;

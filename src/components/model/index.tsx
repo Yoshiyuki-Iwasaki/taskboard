@@ -1,25 +1,10 @@
+import React, { useState, FC } from 'react';
 import { useCollection } from 'react-firebase-hooks/firestore';
-import React, { useState } from 'react';
 import firebase from '../../firebase/clientApp';
 import { ModalType } from './type';
-import {
-  Main,
-  Header,
-  Title,
-  Button,
-  Body,
-  LeftArea,
-  LeftAreaList,
-  LeftAreaListItem,
-  LeftAreaTitle,
-  LeftAreaForm,
-  LeftAreaInput,
-  RightArea,
-  RightAreaButton,
-  Overlay,
-} from './style';
+import Presenter from './presenter';
 
-const Modal: React.FC<ModalType> = ({
+const Modal: FC<ModalType> = ({
   todos,
   show,
   setShow,
@@ -52,7 +37,7 @@ const Modal: React.FC<ModalType> = ({
     setShow(false);
   };
 
-  const SubmitComment = async (e): Promise<any> => {
+  const submitComment = async (e): Promise<any> => {
     e.preventDefault();
     if (!comment) return;
     await db.collection('comment').add({
@@ -73,43 +58,19 @@ const Modal: React.FC<ModalType> = ({
   }
 
   return (
-    <>
-      {docId == modalId && show ? (
-        <>
-          <Main>
-            <Header>
-              <Title>{doc.message}</Title>
-              <Button onClick={() => closeModal()}>閉じる</Button>
-            </Header>
-            <Body>
-              <LeftArea>
-                <LeftAreaList>
-                  {commentList.docs.map((data, index) => (
-                    <LeftAreaListItem key={index}>
-                      {data.data().comment}
-                    </LeftAreaListItem>
-                  ))}
-                  <LeftAreaTitle>コメント</LeftAreaTitle>
-                  <LeftAreaForm onSubmit={(e) => SubmitComment(e)}>
-                    <LeftAreaInput
-                      type="text"
-                      value={comment}
-                      onChange={(e) => setComment(e.target.value)}
-                    />
-                  </LeftAreaForm>
-                </LeftAreaList>
-              </LeftArea>
-              <RightArea>
-                <RightAreaButton onClick={() => removeModalButton(params)}>
-                  削除
-                </RightAreaButton>
-              </RightArea>
-            </Body>
-          </Main>
-          <Overlay onClick={() => closeModal()} />
-        </>
-      ) : null}
-    </>
+    <Presenter
+      params={params}
+      docId={docId}
+      modalId={modalId}
+      show={show}
+      doc={doc}
+      closeModal={closeModal}
+      commentList={commentList}
+      comment={comment}
+      setComment={setComment}
+      submitComment={submitComment}
+      removeModalButton={removeModalButton}
+    />
   );
 };
 

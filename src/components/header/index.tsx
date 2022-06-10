@@ -1,25 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase from '../../firebase/clientApp';
-import Link from 'next/link';
-import {
-  HeaderLayout,
-  Inner,
-  Title,
-  Logo,
-  LeftArea,
-  Hover,
-  Wrapper,
-  Icon,
-  IconImage,
-  Text,
-  List,
-  ListItem,
-  ListLink,
-  Button,
-} from './style';
+import Presenter from './presenter';
 
-const Header: React.FC = () => {
+const Header: FC = () => {
   const [user, loading, error] = useAuthState(firebase.auth());
   const logout = () => {
     firebase.auth().signOut();
@@ -29,45 +13,7 @@ const Header: React.FC = () => {
 
   if (error) return null;
 
-  return (
-    <HeaderLayout>
-      <Inner>
-        <Title>
-          <Link href="/" as="/" passHref>
-            <Logo>taskboard</Logo>
-          </Link>
-        </Title>
-        {user && (
-          <>
-            <LeftArea>
-              <Hover>
-                <Wrapper>
-                  <Icon>
-                    <IconImage src={user.photoURL} />
-                  </Icon>
-                  <Text>{user.displayName}</Text>
-                </Wrapper>
-                <List>
-                  <ListItem>
-                    <Link
-                      href={`/user/${user.uid}`}
-                      as={`/user/${user.uid}`}
-                      passHref
-                    >
-                      <ListLink>プロフィールを見る</ListLink>
-                    </Link>
-                  </ListItem>
-                  <ListItem>
-                    <Button onClick={() => logout()}>ログアウト</Button>
-                  </ListItem>
-                </List>
-              </Hover>
-            </LeftArea>
-          </>
-        )}
-      </Inner>
-    </HeaderLayout>
-  );
+  return <Presenter user={user} logout={logout} />;
 };
 
 export default Header;

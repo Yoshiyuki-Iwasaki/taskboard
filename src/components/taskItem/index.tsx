@@ -1,10 +1,8 @@
 import { useState, useRef } from 'react';
 import firebase from '../../firebase/clientApp';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import Modal from '../model';
-import TaskInput from '../taskInput';
-import { Board, Title, Wrapper, List, Button } from './style';
 import { Todo } from './type';
+import Presenter from './presenter';
 
 const TaskItem = ({ chatList }: any) => {
   const db = firebase.firestore();
@@ -63,7 +61,7 @@ const TaskItem = ({ chatList }: any) => {
     }
   };
 
-  const UpdateDragData = async () => {
+  const updateDragData = async () => {
     const docRef = await db.collection('chatList').doc('block01');
     docRef.update({ items: list[0].items });
     const docRef02 = await db.collection('chatList').doc('block02');
@@ -86,67 +84,23 @@ const TaskItem = ({ chatList }: any) => {
   }
 
   return (
-    <>
-      {list &&
-        list.map((todos, chatIndex) => (
-          <Board
-            key={chatIndex}
-            onDragEnter={
-              dragging && !todos.items.length
-                ? (e) => handleDragEnter(e, { chatIndex, todosIndex: 0 })
-                : null
-            }
-          >
-            <Title>{todos.title}</Title>
-            {todos.items &&
-              todos.items.map((doc, todosIndex) => (
-                <Wrapper key={todosIndex}>
-                  <List
-                    onClick={() => openModal(doc.id)}
-                    draggable
-                    onDragEnter={
-                      dragging
-                        ? (e) => handleDragEnter(e, { chatIndex, todosIndex })
-                        : null
-                    }
-                    onDragStart={(e) =>
-                      handleDragStart(e, { chatIndex, todosIndex })
-                    }
-                    onDragEnd={UpdateDragData}
-                    data-id={doc.id}
-                  >
-                    <p>{doc.message}</p>
-                  </List>
-                  <Modal
-                    todos={todos}
-                    chatList={chatList}
-                    params={{ chatIndex, todosIndex }}
-                    show={show}
-                    setShow={setShow}
-                    doc={doc}
-                    docId={doc.id}
-                    modalId={modalId}
-                  />
-                </Wrapper>
-              ))}
-            {chatIndex == open ? (
-              <TaskInput
-                chatIndex={chatIndex}
-                text={text}
-                setText={setText}
-                todos={todos}
-                setTodoList={setTodoList}
-                list={list}
-                user={user}
-              />
-            ) : (
-              <Button onClick={() => openInputField(chatIndex)}>
-                カードを追加する
-              </Button>
-            )}
-          </Board>
-        ))}
-    </>
+    <Presenter
+      list={list}
+      user={user}
+      modalId={modalId}
+      chatList={chatList}
+      dragging={dragging}
+      show={show}
+      setShow={setShow}
+      text={text}
+      setText={setText}
+      setTodoList={setTodoList}
+      handleDragEnter={handleDragEnter}
+      handleDragStart={handleDragStart}
+      openInputField={openInputField}
+      openModal={openModal}
+      updateDragData={updateDragData}
+    />
   );
 };
 
