@@ -1,7 +1,7 @@
-import { useCollection } from "react-firebase-hooks/firestore";
-import React, { useState } from "react";
-import firebase from "../../../firebase/clientApp";
-import { ModalType } from "./type";
+import { useCollection } from 'react-firebase-hooks/firestore';
+import React, { useState } from 'react';
+import firebase from '../../firebase/clientApp';
+import { ModalType } from './type';
 import {
   Main,
   Header,
@@ -17,7 +17,7 @@ import {
   RightArea,
   RightAreaButton,
   Overlay,
-} from "./style";
+} from './style';
 
 const Modal: React.FC<ModalType> = ({
   todos,
@@ -29,10 +29,10 @@ const Modal: React.FC<ModalType> = ({
   params,
   chatList,
 }) => {
-  const [comment, setComment] = useState<string>("");
+  const [comment, setComment] = useState<string>('');
   const db = firebase.firestore();
   const [commentList, loading, error] = useCollection(
-    db.collection("comment").where("postId", "==", docId),
+    db.collection('comment').where('postId', '==', docId),
     {}
   );
 
@@ -41,7 +41,7 @@ const Modal: React.FC<ModalType> = ({
   };
 
   const removeModalButton = async (params): Promise<any> => {
-    db.collection("chatList")
+    db.collection('chatList')
       .doc(chatList?.docs[params.chatIndex].id)
       .update({
         items: firebase.firestore.FieldValue.arrayRemove(
@@ -55,13 +55,13 @@ const Modal: React.FC<ModalType> = ({
   const SubmitComment = async (e): Promise<any> => {
     e.preventDefault();
     if (!comment) return;
-    await db.collection("comment").add({
+    await db.collection('comment').add({
       id: new Date().getTime(),
       comment: comment,
       postId: docId,
       // createdAt: new Date(),
     });
-    setComment("");
+    setComment('');
   };
 
   if (loading) {
@@ -90,11 +90,11 @@ const Modal: React.FC<ModalType> = ({
                     </LeftAreaListItem>
                   ))}
                   <LeftAreaTitle>コメント</LeftAreaTitle>
-                  <LeftAreaForm onSubmit={e => SubmitComment(e)}>
+                  <LeftAreaForm onSubmit={(e) => SubmitComment(e)}>
                     <LeftAreaInput
                       type="text"
                       value={comment}
-                      onChange={e => setComment(e.target.value)}
+                      onChange={(e) => setComment(e.target.value)}
                     />
                   </LeftAreaForm>
                 </LeftAreaList>

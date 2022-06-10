@@ -1,7 +1,7 @@
-import React from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import firebase from "../../../firebase/clientApp";
-import Link from "next/link";
+import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import firebase from '../../firebase/clientApp';
+import Link from 'next/link';
 import {
   HeaderLayout,
   Inner,
@@ -17,7 +17,7 @@ import {
   ListItem,
   ListLink,
   Button,
-} from "./style";
+} from './style';
 
 const Header: React.FC = () => {
   const [user, loading, error] = useAuthState(firebase.auth());
@@ -26,6 +26,7 @@ const Header: React.FC = () => {
   };
 
   if (loading) return <h6>Loading...</h6>;
+
   if (error) return null;
 
   return (

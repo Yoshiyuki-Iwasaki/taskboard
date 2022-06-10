@@ -1,5 +1,5 @@
-import TaskList from "../components/organisms/taskList";
-import Layout from "../components/templates/layout";
+import TaskList from '../components/taskList';
+import Layout from '../components/layout';
 
 export default function Home() {
   return (

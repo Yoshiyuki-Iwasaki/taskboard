@@ -1,12 +1,12 @@
-import { useCollection } from "react-firebase-hooks/firestore";
-import firebase from "../../../firebase/clientApp";
-import TaskItem from "../../molecules/taskItem";
-import { Main } from "./style";
+import { useCollection } from 'react-firebase-hooks/firestore';
+import firebase from '../../firebase/clientApp';
+import TaskItem from '../taskItem';
+import { Main } from './style';
 
 const TaskList = () => {
   const db = firebase.firestore();
   const [chatList, loading, error] = useCollection(
-    db.collection("chatList"),
+    db.collection('chatList'),
     {}
   );
 

@@ -1,10 +1,10 @@
-import React from "react";
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import firebase from "../../../firebase/clientApp";
-import { Main } from "./style";
+import React from 'react';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import firebase from '../../firebase/clientApp';
+import { Main } from './style';
 
 const uiConfig = {
-  signInSuccessUrl: "/",
+  signInSuccessUrl: '/',
   signInOptions: [firebase.auth.TwitterAuthProvider.PROVIDER_ID],
 };
 

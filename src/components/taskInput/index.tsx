@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect } from "react";
-import firebase from "../../../firebase/clientApp";
-import { TaskInputType, TaskTodoType } from "./type";
-import { Form, Input } from "./style";
+import { useState, useRef, useEffect } from 'react';
+import firebase from '../../firebase/clientApp';
+import { TaskInputType, TaskTodoType } from './type';
+import { Form, Input } from './style';
 
 const TaskInput: React.FC<TaskInputType> = ({
   chatIndex,
@@ -15,14 +15,14 @@ const TaskInput: React.FC<TaskInputType> = ({
   const db = firebase.firestore();
   const convertJST = new Date();
   convertJST.setHours(convertJST.getHours());
-  const updatedTime = convertJST.toLocaleString("ja-JP").slice(0, -3);
+  const updatedTime = convertJST.toLocaleString('ja-JP').slice(0, -3);
   const [isChangedTodo, setIsChangedTodo] = useState(false);
 
   useEffect(() => {
     if (isChangedTodo) {
       (async () => {
         const docRef = await db
-          .collection("chatList")
+          .collection('chatList')
           .doc(`block0${chatIndex + 1}`);
         docRef.update({ items: todos.items });
       })();
@@ -41,12 +41,16 @@ const TaskInput: React.FC<TaskInputType> = ({
     };
     list[chatIndex].items.push(newTodo);
     setTodoList([...todos.items, newTodo]);
-    setText("");
+    setText('');
   };
 
   return (
-    <Form onSubmit={e => handleSubmit(e, chatIndex)}>
-      <Input type="text" value={text} onChange={e => setText(e.target.value)} />
+    <Form onSubmit={(e) => handleSubmit(e, chatIndex)}>
+      <Input
+        type="text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
     </Form>
   );
 };
