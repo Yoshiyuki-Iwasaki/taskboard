@@ -8,7 +8,7 @@ import { useCloseModal, useRemoveModalButton, useSubmitComment } from "./hooks";
 const Modal: FC<ModalType> = ({ todos, show, setShow, doc, docId, modalId, params, chatList }) => {
   const db = firebase.firestore();
   const [commentList, loading, error] = useCollection(db.collection("comment").where("postId", "==", docId), {});
-  const closeModal = useCloseModal(setShow);
+  const closeModal = useCloseModal({ setShow });
   const removeModalButton = useRemoveModalButton(db, chatList, todos, setShow);
   const { comment, setComment, submitComment } = useSubmitComment(db, docId);
 

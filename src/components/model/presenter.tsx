@@ -60,7 +60,7 @@ const Presenter: FC<any> = ({
               </RightArea>
             </Body>
           </Main>
-          <Overlay onClick={() => closeModal()} />
+          <Overlay onClick={closeModal} />
         </>
       ) : null}
     </>
