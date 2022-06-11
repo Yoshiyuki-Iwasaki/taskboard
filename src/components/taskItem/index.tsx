@@ -13,13 +13,13 @@ import {
 
 const TaskItem = ({ chatList }: any) => {
   const db = firebase.firestore();
-  const [dragging, setDragging] = useState<boolean>(false);
   const [user, loading, error] = useAuthState(firebase.auth());
+  const [dragging, setDragging] = useState<boolean>(false);
   const dragItem = useRef<any>();
   const dragNode = useRef<any>();
   const [list, setList] = useState([chatList?.docs[0].data(), chatList?.docs[1].data(), chatList?.docs[2].data()]);
   const { modalId, show, setShow, openModal } = useOpenModal();
-  const { text, setText, openInputField } = useOpenInputField();
+  const { openId, text, setText, openInputField } = useOpenInputField();
   const handleDragEnd = useHandleDragEnd({ dragNode, dragItem, setDragging });
   const handleDragStart = useHandleDragStart({ dragNode, dragItem, setDragging, handleDragEnd });
   const handleDragEnter = useHandleDragEnter({ dragNode, dragItem, setList });
@@ -46,6 +46,7 @@ const TaskItem = ({ chatList }: any) => {
       setText={setText}
       handleDragEnter={handleDragEnter}
       handleDragStart={handleDragStart}
+      openId={openId}
       openInputField={openInputField}
       openModal={openModal}
       updateDragData={updateDragData}
