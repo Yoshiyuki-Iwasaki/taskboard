@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
-import TaskItem from '../taskItem';
-import { Main } from './style';
+import React, { FC } from "react";
+import TaskItem from "../taskItem";
+import { Main } from "./style";
 
 const Presenter: FC<any> = ({ chatList }) => {
   return (

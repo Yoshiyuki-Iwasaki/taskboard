@@ -1,13 +1,10 @@
-import { useCollection } from 'react-firebase-hooks/firestore';
-import firebase from '../../firebase/clientApp';
-import Presenter from './presenter';
+import { useCollection } from "react-firebase-hooks/firestore";
+import firebase from "../../firebase/clientApp";
+import Presenter from "./presenter";
 
 const TaskList = () => {
   const db = firebase.firestore();
-  const [chatList, loading, error] = useCollection(
-    db.collection('chatList'),
-    {}
-  );
+  const [chatList, loading, error] = useCollection(db.collection("chatList"), {});
 
   if (loading) {
     return <h6>Loading...</h6>;

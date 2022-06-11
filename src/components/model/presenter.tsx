@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC } from "react";
 import {
   Main,
   Header,
@@ -13,8 +13,8 @@ import {
   LeftAreaInput,
   RightArea,
   RightAreaButton,
-  Overlay,
-} from './style';
+  Overlay
+} from "./style";
 
 const Presenter: FC<any> = ({
   docId,
@@ -27,7 +27,7 @@ const Presenter: FC<any> = ({
   comment,
   setComment,
   removeModalButton,
-  params,
+  params
 }) => {
   return (
     <>
@@ -42,24 +42,16 @@ const Presenter: FC<any> = ({
               <LeftArea>
                 <LeftAreaList>
                   {commentList.docs.map((data, index) => (
-                    <LeftAreaListItem key={index}>
-                      {data.data().comment}
-                    </LeftAreaListItem>
+                    <LeftAreaListItem key={index}>{data.data().comment}</LeftAreaListItem>
                   ))}
                   <LeftAreaTitle>コメント</LeftAreaTitle>
                   <LeftAreaForm onSubmit={(e) => submitComment(e)}>
-                    <LeftAreaInput
-                      type="text"
-                      value={comment}
-                      onChange={(e) => setComment(e.target.value)}
-                    />
+                    <LeftAreaInput type="text" value={comment} onChange={(e) => setComment(e.target.value)} />
                   </LeftAreaForm>
                 </LeftAreaList>
               </LeftArea>
               <RightArea>
-                <RightAreaButton onClick={() => removeModalButton(params)}>
-                  削除
-                </RightAreaButton>
+                <RightAreaButton onClick={() => removeModalButton(params)}>削除</RightAreaButton>
               </RightArea>
             </Body>
           </Main>

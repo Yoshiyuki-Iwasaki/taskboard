@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
-import Modal from '../model';
-import TaskInput from '../taskInput';
-import { Board, Title, Wrapper, List, Button } from './style';
+import React, { FC } from "react";
+import Modal from "../model";
+import TaskInput from "../taskInput";
+import { Board, Title, Wrapper, List, Button } from "./style";
 
 const Presenter: FC<any> = ({
   list,
@@ -18,7 +18,7 @@ const Presenter: FC<any> = ({
   handleDragStart,
   openInputField,
   openModal,
-  updateDragData,
+  updateDragData
 }) => {
   return (
     <>
@@ -27,9 +27,7 @@ const Presenter: FC<any> = ({
           <Board
             key={chatIndex}
             onDragEnter={
-              dragging && !todos.items.length
-                ? (e) => handleDragEnter(e, { chatIndex, todosIndex: 0 })
-                : null
+              dragging && !todos.items.length ? (e) => handleDragEnter(e, { chatIndex, todosIndex: 0 }) : null
             }
           >
             <Title>{todos.title}</Title>
@@ -39,14 +37,8 @@ const Presenter: FC<any> = ({
                   <List
                     onClick={() => openModal(doc.id)}
                     draggable
-                    onDragEnter={
-                      dragging
-                        ? (e) => handleDragEnter(e, { chatIndex, todosIndex })
-                        : null
-                    }
-                    onDragStart={(e) =>
-                      handleDragStart(e, { chatIndex, todosIndex })
-                    }
+                    onDragEnter={dragging ? (e) => handleDragEnter(e, { chatIndex, todosIndex }) : null}
+                    onDragStart={(e) => handleDragStart(e, { chatIndex, todosIndex })}
                     onDragEnd={updateDragData}
                     data-id={doc.id}
                   >
@@ -75,9 +67,7 @@ const Presenter: FC<any> = ({
                 user={user}
               />
             ) : (
-              <Button onClick={() => openInputField(chatIndex)}>
-                カードを追加する
-              </Button>
+              <Button onClick={() => openInputField(chatIndex)}>カードを追加する</Button>
             )}
           </Board>
         ))}

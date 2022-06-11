@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { Main } from './style';
+import React, { FC } from "react";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import { Main } from "./style";
 
 const Presenter: FC<any> = ({ uiConfig, firebase }) => {
   return (
