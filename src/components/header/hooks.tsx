@@ -1,4 +1,4 @@
-import firebase from '../../firebase/clientApp';
+import firebase from "../../firebase/clientApp";
 
 export const useLogout = () => {
   const logout = () => {
