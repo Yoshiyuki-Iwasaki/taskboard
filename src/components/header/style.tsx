@@ -16,16 +16,10 @@ export const Inner = styled.div`
   justify-content: space-between;
 `;
 export const Title = styled.div``;
-export const Logo = styled.a`
-  transition: opacity 0.6s;
-  cursor: pointer;
+export const Logo = styled.h1`
   font-size: 28px;
   font-weight: 700;
   letter-spacing: 0.025em;
-
-  &:hover {
-    opacity: 0.6;
-  }
 `;
 export const LeftArea = styled.div`
   display: flex;
