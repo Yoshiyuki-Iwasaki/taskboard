@@ -39,7 +39,7 @@ const Presenter: FC<PresenterType> = ({ user, logout }) => {
                 </Wrapper>
                 <List>
                   <ListItem>
-                    <Link href={`/user/${user.uid}`} as={`/user/${user.uid}`} passHref>
+                    <Link href={`/myUser/${user.uid}`} as={`/myUser/${user.uid}`} passHref>
                       <ListLink>プロフィールを見る</ListLink>
                     </Link>
                   </ListItem>

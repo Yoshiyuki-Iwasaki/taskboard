@@ -1,10 +1,21 @@
-import TaskList from "../components/taskList";
-import Layout from "../components/layout";
+import { FC } from "react";
+import { useCollection } from "react-firebase-hooks/firestore";
+import firebase from "../firebase/clientApp";
+import Presenter from "./presenter";
 
-export default function Home() {
-  return (
-    <Layout>
-      <TaskList />
-    </Layout>
-  );
-}
+const Home: FC = () => {
+  const db = firebase.firestore();
+  const [chatList, loading, error] = useCollection(db.collection("chatList"), {});
+
+  if (loading) {
+    return <h6>Loading...</h6>;
+  }
+
+  if (error) {
+    return null;
+  }
+
+  return <Presenter chatList={chatList} />;
+};
+
+export default Home;
