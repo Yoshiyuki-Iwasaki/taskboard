@@ -7,9 +7,9 @@ export type TaskInputType = {
   user: any;
 };
 
-export type TaskTodoType = {
-  id: number;
-  message: string;
-  userId: any;
-  createdAt: any;
+export type PresenterType = {
+  chatIndex: number;
+  text: string;
+  setText: any;
+  handleSubmit: any;
 };

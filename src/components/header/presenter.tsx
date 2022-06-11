@@ -16,8 +16,9 @@ import {
   ListLink,
   Button
 } from "./style";
+import { PresenterType } from "./type";
 
-const Presenter: FC<any> = ({ user, logout }) => {
+const Presenter: FC<PresenterType> = ({ user, logout }) => {
   return (
     <HeaderLayout>
       <Inner>

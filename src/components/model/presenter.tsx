@@ -17,8 +17,9 @@ import {
   RightAreaButton,
   Overlay
 } from "./style";
+import { PresenterType } from "./type";
 
-const Presenter: FC<any> = ({
+const Presenter: FC<PresenterType> = ({
   docId,
   modalId,
   show,
