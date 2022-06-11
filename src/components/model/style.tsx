@@ -19,6 +19,7 @@ export const Button = styled.button`
   top: 20px;
   right: 20px;
 `;
+export const TitleArea = styled.div``;
 
 export const Title = styled.p`
   padding: 5px;
@@ -28,6 +29,11 @@ export const Title = styled.p`
   font-size: 26px;
   line-height: 24px;
   font-weight: 700;
+`;
+
+export const Date = styled.p`
+  margin-top: 10px;
+  font-size: 14px;
 `;
 
 export const Body = styled.div`
