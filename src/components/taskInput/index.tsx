@@ -1,14 +1,13 @@
 import { useState, useEffect, FC } from "react";
 import firebase from "../../firebase/clientApp";
-import { TaskInputType, TaskTodoType } from "./type";
+import { TaskInputType } from "./type";
 import Presenter from "./presenter";
+import { useHandleSubmit } from "./hooks";
 
-const TaskInput: FC<TaskInputType> = ({ chatIndex, text, setText, todos, setTodoList, list, user }) => {
+const TaskInput: FC<TaskInputType> = ({ chatIndex, text, setText, todos, list, user }) => {
   const db = firebase.firestore();
-  const convertJST = new Date();
-  convertJST.setHours(convertJST.getHours());
-  const updatedTime = convertJST.toLocaleString("ja-JP").slice(0, -3);
   const [isChangedTodo, setIsChangedTodo] = useState(false);
+  const handleSubmit = useHandleSubmit(user, list, text, setText, setIsChangedTodo);
 
   useEffect(() => {
     if (isChangedTodo) {
@@ -18,21 +17,6 @@ const TaskInput: FC<TaskInputType> = ({ chatIndex, text, setText, todos, setTodo
       })();
     }
   }, [isChangedTodo, db]);
-
-  const handleSubmit = (e, chatIndex) => {
-    e.preventDefault();
-    if (!text) return;
-    setIsChangedTodo(true);
-    const newTodo: TaskTodoType = {
-      id: new Date().getTime(),
-      message: text,
-      userId: user.uid,
-      createdAt: updatedTime
-    };
-    list[chatIndex].items.push(newTodo);
-    setTodoList([...todos.items, newTodo]);
-    setText("");
-  };
 
   return <Presenter chatIndex={chatIndex} text={text} setText={setText} handleSubmit={handleSubmit} />;
 };

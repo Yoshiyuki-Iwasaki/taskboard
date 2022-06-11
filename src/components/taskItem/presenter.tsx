@@ -13,7 +13,6 @@ const Presenter: FC<any> = ({
   setShow,
   text,
   setText,
-  setTodoList,
   handleDragEnter,
   handleDragStart,
   openInputField,
@@ -57,17 +56,9 @@ const Presenter: FC<any> = ({
                 </Wrapper>
               ))}
             {chatIndex == open ? (
-              <TaskInput
-                chatIndex={chatIndex}
-                text={text}
-                setText={setText}
-                todos={todos}
-                setTodoList={setTodoList}
-                list={list}
-                user={user}
-              />
+              <TaskInput chatIndex={chatIndex} text={text} setText={setText} todos={todos} list={list} user={user} />
             ) : (
-              <Button onClick={() => openInputField(chatIndex)}>カードを追加する</Button>
+              <Button onClick={() => openInputField()}>カードを追加する</Button>
             )}
           </Board>
         ))}
