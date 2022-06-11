@@ -3,7 +3,6 @@ export type TaskInputType = {
   text: string;
   setText: any;
   todos: any;
-  setTodoList: any;
   list: any;
   user: any;
 };
