@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, FC } from "react";
 import firebase from "../../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Presenter from "./presenter";
@@ -10,8 +10,9 @@ import {
   useHandleDragEnter,
   useUpdateDragData
 } from "./hooks";
+import { TaskItemType } from "./type";
 
-const TaskItem = ({ chatList }: any) => {
+const TaskItem: FC<TaskItemType> = ({ chatList }) => {
   const db = firebase.firestore();
   const [user, loading, error] = useAuthState(firebase.auth());
   const [dragging, setDragging] = useState<boolean>(false);

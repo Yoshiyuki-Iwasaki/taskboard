@@ -2,8 +2,9 @@ import React, { FC } from "react";
 import Modal from "../model";
 import TaskInput from "../taskInput";
 import { Board, Title, Wrapper, List, Button, Text } from "./style";
+import { PresenterType } from "./type";
 
-const Presenter: FC<any> = ({
+const Presenter: FC<PresenterType> = ({
   list,
   user,
   modalId,
