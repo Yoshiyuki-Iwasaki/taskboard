@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import Link from 'next/link';
+import React, { FC } from "react";
+import Link from "next/link";
 import {
   HeaderLayout,
   Inner,
@@ -14,8 +14,8 @@ import {
   List,
   ListItem,
   ListLink,
-  Button,
-} from './style';
+  Button
+} from "./style";
 
 const Presenter: FC<any> = ({ user, logout }) => {
   return (
@@ -38,11 +38,7 @@ const Presenter: FC<any> = ({ user, logout }) => {
                 </Wrapper>
                 <List>
                   <ListItem>
-                    <Link
-                      href={`/user/${user.uid}`}
-                      as={`/user/${user.uid}`}
-                      passHref
-                    >
+                    <Link href={`/user/${user.uid}`} as={`/user/${user.uid}`} passHref>
                       <ListLink>プロフィールを見る</ListLink>
                     </Link>
                   </ListItem>

@@ -1,7 +1,7 @@
-import firebase from '../../firebase/clientApp';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { LayoutType } from './type';
-import Presenter from './presenter';
+import firebase from "../../firebase/clientApp";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { LayoutType } from "./type";
+import Presenter from "./presenter";
 
 const Layout: React.FC<LayoutType> = ({ children }) => {
   const [user, loading, error] = useAuthState(firebase.auth());
