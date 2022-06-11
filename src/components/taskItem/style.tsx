@@ -30,4 +30,9 @@ export const List = styled.div`
 
 export const Button = styled.button`
   padding: 10px;
+  width: 100%;
+  text-align: left;
+`;
+export const Text = styled.p`
+  font-size: 14px;
 `;

@@ -68,6 +68,7 @@ export const LeftAreaTitle = styled.p`
 
 export const LeftAreaForm = styled.form`
   margin-bottom: 10px;
+  background: #fff;
 `;
 
 export const LeftAreaInput = styled.input`

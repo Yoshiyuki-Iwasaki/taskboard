@@ -2,8 +2,8 @@
 Reset
 ====================================================================*/
 html {
-  color: $black;
-  background: $white;
+  color: #333;
+  background: #fff;
 }
 
 html,
@@ -242,11 +242,11 @@ select {
 
 /* because legend doesn't inherit in IE */
 legend {
-  color: $black;
+  color: #333;
 }
 
 a {
-  color: $black;
+  color: #333;
   text-decoration: none;
 }
 

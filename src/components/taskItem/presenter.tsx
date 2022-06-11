@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import Modal from "../model";
 import TaskInput from "../taskInput";
-import { Board, Title, Wrapper, List, Button } from "./style";
+import { Board, Title, Wrapper, List, Button, Text } from "./style";
 
 const Presenter: FC<any> = ({
   list,
@@ -41,7 +41,7 @@ const Presenter: FC<any> = ({
                     onDragEnd={updateDragData}
                     data-id={doc.id}
                   >
-                    <p>{doc.message}</p>
+                    <Text>{doc.message}</Text>
                   </List>
                   <Modal
                     todos={todos}
