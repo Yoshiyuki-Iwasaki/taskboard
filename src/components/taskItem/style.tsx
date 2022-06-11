@@ -7,8 +7,8 @@ export const Board = styled.div`
   border-radius: 5px;
 `;
 
-export const Title = styled.h1`
-  font-size: 18px;
+export const Title = styled.h2`
+  font-size: 22px;
   color: #333;
   font-weight: 700;
 `;
