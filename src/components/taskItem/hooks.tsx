@@ -3,23 +3,21 @@ import { useState } from "react";
 export const useOpenModal = () => {
   const [modalId, setModalId] = useState<number>(0);
   const [show, setShow] = useState<boolean>(false);
-
   const openModal = (doc) => {
     setShow(true);
     setModalId(doc);
   };
-
   return { modalId, show, setShow, openModal };
 };
 
 export const useOpenInputField = () => {
-  const [openFlag, setOpenFlag] = useState<boolean>(false);
+  const [openId, setOpenId] = useState<number>();
   const [text, setText] = useState<string>("");
-  const openInputField = () => {
+  const openInputField = (chatIndex) => {
     setText("");
-    setOpenFlag(!openFlag);
+    setOpenId(chatIndex);
   };
-  return { openFlag, text, setText, openInputField };
+  return { openId, text, setText, openInputField };
 };
 
 export const useHandleDragEnd: any = ({ dragNode, dragItem, setDragging }) => {
