@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
-import Header from '../header';
-import Auth from '../auth';
-import { Main } from './style';
+import React, { FC } from "react";
+import Header from "../header";
+import Auth from "../auth";
+import { Main } from "./style";
 
 const Presenter: FC<any> = ({ user, children }) => {
   return (

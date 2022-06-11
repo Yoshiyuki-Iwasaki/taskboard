@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import firebase from '../../firebase/clientApp';
-import Presenter from './presenter';
+import React, { FC } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import firebase from "../../firebase/clientApp";
+import Presenter from "./presenter";
 
 const Header: FC = () => {
   const [user, loading, error] = useAuthState(firebase.auth());
