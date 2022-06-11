@@ -2,7 +2,9 @@ import React, { FC } from "react";
 import {
   Main,
   Header,
+  TitleArea,
   Title,
+  Date,
   Button,
   Body,
   LeftArea,
@@ -35,8 +37,11 @@ const Presenter: FC<any> = ({
         <>
           <Main>
             <Header>
-              <Title>{doc.message}</Title>
-              <Button onClick={() => closeModal()}>閉じる</Button>
+              <TitleArea>
+                <Title>{doc.message}</Title>
+                <Date>作成日:{doc.createdAt}</Date>
+              </TitleArea>
+              <Button onClick={closeModal}>閉じる</Button>
             </Header>
             <Body>
               <LeftArea>
@@ -55,7 +60,7 @@ const Presenter: FC<any> = ({
               </RightArea>
             </Body>
           </Main>
-          <Overlay onClick={() => closeModal()} />
+          <Overlay onClick={closeModal} />
         </>
       ) : null}
     </>

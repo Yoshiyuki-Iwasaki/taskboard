@@ -58,7 +58,7 @@ const Presenter: FC<any> = ({
             {chatIndex == open ? (
               <TaskInput chatIndex={chatIndex} text={text} setText={setText} todos={todos} list={list} user={user} />
             ) : (
-              <Button onClick={() => openInputField()}>カードを追加する</Button>
+              <Button onClick={openInputField}>カードを追加する</Button>
             )}
           </Board>
         ))}

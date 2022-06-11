@@ -1,11 +1,10 @@
 import firebase from "../../firebase/clientApp";
 import { useState } from "react";
 
-export const useCloseModal = ({ setShow }) => {
+export const useCloseModal: any = ({ setShow }) => {
   const closeModal = () => {
     setShow(false);
   };
-
   return closeModal;
 };
 

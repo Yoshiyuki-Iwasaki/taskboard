@@ -13,11 +13,13 @@ export const useOpenModal = () => {
 };
 
 export const useOpenInputField = () => {
+  const [openFlag, setOpenFlag] = useState<boolean>(false);
   const [text, setText] = useState<string>("");
   const openInputField = () => {
     setText("");
+    setOpenFlag(!openFlag);
   };
-  return { text, setText, openInputField };
+  return { openFlag, text, setText, openInputField };
 };
 
 export const useHandleDragEnd: any = ({ dragNode, dragItem, setDragging }) => {
