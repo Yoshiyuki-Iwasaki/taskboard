@@ -1,9 +1,11 @@
+import { UserType } from "../type";
+
 export type PresenterType = {
   list: any;
-  user: any;
+  user: UserType;
   modalId: number;
   chatList: any;
-  dragging: any;
+  dragging: boolean;
   show: boolean;
   setShow: any;
   text: string;

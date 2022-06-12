@@ -1,11 +1,14 @@
 export type ModalType = {
   todos: any;
   show: boolean;
-  setShow: any;
-  doc: any;
+  setShow: () => void;
+  doc: {
+    message: string;
+    createdAt: any;
+  };
   docId: number;
   modalId: number;
-  params: any;
+  params: { chatIndex: number; todosIndex: number };
   chatList: any;
 };
 
@@ -13,12 +16,19 @@ export type PresenterType = {
   docId: number;
   modalId: number;
   show: boolean;
-  doc: any;
+  doc: {
+    message: string;
+    createdAt: any;
+  };
   closeModal: any;
   commentList: any;
   submitComment: any;
   comment: string;
   setComment: any;
   removeModalButton: any;
-  params: any;
+  params: { chatIndex: number; todosIndex: number };
+};
+
+export type useCloseModalType = {
+  setShow: () => void;
 };
