@@ -1,3 +1,4 @@
+// タスク追加するCustom hooks.
 export const useHandleSubmit: any = ({ user, list, text, setText, setIsChangedTodo }) => {
   const convertJST = new Date();
   convertJST.setHours(convertJST.getHours());
