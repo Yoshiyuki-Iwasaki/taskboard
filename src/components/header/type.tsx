@@ -1,4 +1,6 @@
+import { UserType } from "../type";
+
 export type PresenterType = {
-  logout: any;
-  user: any;
+  logout: () => void;
+  user: UserType;
 };

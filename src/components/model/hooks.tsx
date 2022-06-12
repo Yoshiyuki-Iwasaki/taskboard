@@ -1,6 +1,7 @@
 import firebase from "../../firebase/clientApp";
 import { useState } from "react";
 
+// モーダルを閉じるCustom hooks.
 export const useCloseModal: any = ({ setShow }) => {
   const closeModal = () => {
     setShow(false);
@@ -8,6 +9,7 @@ export const useCloseModal: any = ({ setShow }) => {
   return closeModal;
 };
 
+// モーダルボタンを削除するCustom hooks.
 export const useRemoveModalButton: any = ({ db, chatList, todos, setShow }) => {
   const removeModalButton = async (params): Promise<any> => {
     db.collection("chatList")
@@ -23,6 +25,7 @@ export const useRemoveModalButton: any = ({ db, chatList, todos, setShow }) => {
   return removeModalButton;
 };
 
+// コメントを追加する削除するCustom hooks.
 export const useSubmitComment: any = ({ db, docId }) => {
   const [comment, setComment] = useState<string>("");
 

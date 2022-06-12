@@ -1,10 +1,12 @@
+import { UserType } from "../type";
+
 export type TaskInputType = {
   chatIndex: number;
   text: string;
   setText: any;
   todos: any;
   list: any;
-  user: any;
+  user: UserType;
 };
 
 export type PresenterType = {
@@ -12,4 +14,11 @@ export type PresenterType = {
   text: string;
   setText: any;
   handleSubmit: any;
+};
+
+export type newTodoType = {
+  id: any;
+  message: string;
+  userId: string;
+  createdAt: any;
 };

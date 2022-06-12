@@ -1,3 +1,6 @@
+import { newTodoType } from "./type";
+
+// タスク追加するCustom hooks.
 export const useHandleSubmit: any = ({ user, list, text, setText, setIsChangedTodo }) => {
   const convertJST = new Date();
   convertJST.setHours(convertJST.getHours());
@@ -7,7 +10,7 @@ export const useHandleSubmit: any = ({ user, list, text, setText, setIsChangedTo
     e.preventDefault();
     if (!text) return;
     setIsChangedTodo(true);
-    const newTodo: any = {
+    const newTodo: newTodoType = {
       id: new Date().getTime(),
       message: text,
       userId: user.uid,

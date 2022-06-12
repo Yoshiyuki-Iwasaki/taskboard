@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+// モーダルを開くCustom hooks.
 export const useOpenModal = () => {
   const [modalId, setModalId] = useState<number>(0);
   const [show, setShow] = useState<boolean>(false);
@@ -10,6 +11,7 @@ export const useOpenModal = () => {
   return { modalId, show, setShow, openModal };
 };
 
+// テキストフィールドを開くCustom hooks.
 export const useOpenInputField = () => {
   const [openId, setOpenId] = useState<number>();
   const [text, setText] = useState<string>("");
@@ -20,6 +22,7 @@ export const useOpenInputField = () => {
   return { openId, text, setText, openInputField };
 };
 
+// ドラッグを終えた時に発火させるCustom hooks.
 export const useHandleDragEnd: any = ({ dragNode, dragItem, setDragging }) => {
   const handleDragEnd = () => {
     setDragging(false);
@@ -30,6 +33,7 @@ export const useHandleDragEnd: any = ({ dragNode, dragItem, setDragging }) => {
   return handleDragEnd;
 };
 
+// ドラッグ始めた時に発火させるCustom hooks.
 export const useHandleDragStart: any = ({ dragNode, dragItem, setDragging, handleDragEnd }) => {
   const handleDragStart = (e, params) => {
     dragItem.current = params;
@@ -42,6 +46,7 @@ export const useHandleDragStart: any = ({ dragNode, dragItem, setDragging, handl
   return handleDragStart;
 };
 
+// 他のセクションにドラッグ始めた際に発火させるCustom hooks.
 export const useHandleDragEnter: any = ({ dragNode, dragItem, setList }) => {
   const handleDragEnter = async (e, params) => {
     const currentItem = dragItem.current;
@@ -61,6 +66,7 @@ export const useHandleDragEnter: any = ({ dragNode, dragItem, setList }) => {
   return handleDragEnter;
 };
 
+// タスクの情報を更新させるCustom hooks.
 export const useUpdateDragData: any = ({ db, list }) => {
   const updateDragData = async () => {
     const docRef = await db.collection("chatList").doc("block01");
