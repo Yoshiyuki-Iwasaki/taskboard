@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import Modal from "../model";
 import TaskInput from "../taskInput";
-import { Board, Title, Wrapper, List, Button, Text } from "./style";
+import { Board, Title, Wrapper, List, TextArea, Text } from "./style";
 import { PresenterType } from "./type";
 
 const Presenter: FC<PresenterType> = ({
@@ -12,12 +12,8 @@ const Presenter: FC<PresenterType> = ({
   dragging,
   show,
   setShow,
-  text,
-  setText,
   handleDragEnter,
   handleDragStart,
-  openId,
-  openInputField,
   openModal,
   updateDragData
 }) => {
@@ -57,11 +53,10 @@ const Presenter: FC<PresenterType> = ({
                   />
                 </Wrapper>
               ))}
-            {chatIndex == openId ? (
-              <TaskInput chatIndex={chatIndex} text={text} setText={setText} todos={todos} list={list} user={user} />
-            ) : (
-              <Button onClick={() => openInputField(chatIndex)}>カードを追加する</Button>
-            )}
+            <TextArea>
+              <Text>タスク新規追加</Text>
+            </TextArea>
+            <TaskInput chatIndex={chatIndex} todos={todos} list={list} user={user} />
           </Board>
         ))}
     </>

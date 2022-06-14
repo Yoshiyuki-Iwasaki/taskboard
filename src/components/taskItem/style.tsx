@@ -33,6 +33,11 @@ export const Button = styled.button`
   width: 100%;
   text-align: left;
 `;
+
+export const TextArea = styled.div`
+  margin-top: 20px;
+`;
+
 export const Text = styled.p`
-  font-size: 14px;
+  font-size: 13px;
 `;
