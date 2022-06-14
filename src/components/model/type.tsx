@@ -1,15 +1,17 @@
 export type ModalType = {
-  todos: any;
+  todos: {
+    items: any;
+  };
   show: boolean;
   setShow: () => void;
   doc: {
     message: string;
-    createdAt: any;
+    createdAt: string;
   };
   docId: number;
   modalId: number;
   params: { chatIndex: number; todosIndex: number };
-  chatList: any;
+  chatList: { docs: any };
 };
 
 export type PresenterType = {
@@ -18,14 +20,14 @@ export type PresenterType = {
   show: boolean;
   doc: {
     message: string;
-    createdAt: any;
+    createdAt: string;
   };
-  closeModal: any;
-  commentList: any;
-  submitComment: any;
+  closeModal: () => void;
+  commentList: { docs: any };
+  submitComment: (e) => void;
   comment: string;
-  setComment: any;
-  removeModalButton: any;
+  setComment: (e) => void;
+  removeModalButton: (params) => void;
   params: { chatIndex: number; todosIndex: number };
 };
 

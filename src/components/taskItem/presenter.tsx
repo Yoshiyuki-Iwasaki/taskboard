@@ -24,7 +24,7 @@ const Presenter: FC<PresenterType> = ({
   return (
     <>
       {list &&
-        list.map((todos, chatIndex) => (
+        list.map((todos, chatIndex: number) => (
           <Board
             key={chatIndex}
             onDragEnter={
@@ -33,7 +33,7 @@ const Presenter: FC<PresenterType> = ({
           >
             <Title>{todos.title}</Title>
             {todos.items &&
-              todos.items.map((doc, todosIndex) => (
+              todos.items.map((doc, todosIndex: number) => (
                 <Wrapper key={todosIndex}>
                   <List
                     onClick={() => openModal(doc.id)}

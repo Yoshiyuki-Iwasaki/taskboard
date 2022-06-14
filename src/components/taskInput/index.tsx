@@ -4,9 +4,10 @@ import { TaskInputType } from "./type";
 import Presenter from "./presenter";
 import { useHandleSubmit } from "./hooks";
 
-const TaskInput: FC<TaskInputType> = ({ chatIndex, text, setText, todos, list, user }) => {
+const TaskInput: FC<TaskInputType> = ({ chatIndex, todos, list, user }) => {
   const db = firebase.firestore();
-  const [isChangedTodo, setIsChangedTodo] = useState(false);
+  const [isChangedTodo, setIsChangedTodo] = useState<boolean>(false);
+  const [text, setText] = useState<string>("");
   const handleSubmit = useHandleSubmit(user, list, text, setText, setIsChangedTodo);
 
   useEffect(() => {

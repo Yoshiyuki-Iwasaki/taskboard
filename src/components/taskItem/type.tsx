@@ -1,25 +1,22 @@
-import { UserType } from "../type";
+import { Dispatch, SetStateAction } from "react";
+import { UserType } from "../../type";
 
 export type PresenterType = {
   list: any;
   user: UserType;
   modalId: number;
-  chatList: any;
+  chatList: { docs: any };
   dragging: boolean;
   show: boolean;
   setShow: any;
-  text: string;
-  setText: any;
-  handleDragEnter: any;
-  handleDragStart: any;
-  openId: number;
-  openInputField: any;
-  openModal: any;
-  updateDragData: any;
+  handleDragEnter: (e, params) => void;
+  handleDragStart: (e, params) => void;
+  openModal: (doc) => void;
+  updateDragData: () => void;
 };
 
 export type TaskItemType = {
-  chatList: any;
+  chatList: { docs: any };
 };
 
 export interface Todo {
