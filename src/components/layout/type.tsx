@@ -1,4 +1,4 @@
-import { UserType } from "../type";
+import { UserType } from "../../type";
 
 export type LayoutType = {
   children?: React.ReactNode;

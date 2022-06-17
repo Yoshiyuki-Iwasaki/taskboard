@@ -4,7 +4,7 @@ import TaskItem from "../components/taskItem";
 import Main from "./style";
 
 type PresenterType = {
-  chatList: any;
+  chatList: { docs: any };
 };
 
 const Presenter: FC<PresenterType> = ({ chatList }) => {

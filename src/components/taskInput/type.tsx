@@ -1,24 +1,26 @@
-import { UserType } from "../type";
+import { UserType } from "../../type/index";
 
 export type TaskInputType = {
   chatIndex: number;
-  text: string;
-  setText: any;
-  todos: any;
-  list: any;
+  todos: {
+    items: any;
+  };
+  list: {
+    items: any;
+  };
   user: UserType;
 };
 
 export type PresenterType = {
   chatIndex: number;
   text: string;
-  setText: any;
+  setText: (e) => void;
   handleSubmit: any;
 };
 
 export type newTodoType = {
-  id: any;
+  id: number;
   message: string;
   userId: string;
-  createdAt: any;
+  createdAt: string;
 };

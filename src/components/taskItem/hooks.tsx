@@ -11,17 +11,6 @@ export const useOpenModal = () => {
   return { modalId, show, setShow, openModal };
 };
 
-// テキストフィールドを開くCustom hooks.
-export const useOpenInputField = () => {
-  const [openId, setOpenId] = useState<number>();
-  const [text, setText] = useState<string>("");
-  const openInputField = (chatIndex) => {
-    setText("");
-    setOpenId(chatIndex);
-  };
-  return { openId, text, setText, openInputField };
-};
-
 // ドラッグを終えた時に発火させるCustom hooks.
 export const useHandleDragEnd: any = ({ dragNode, dragItem, setDragging }) => {
   const handleDragEnd = () => {
