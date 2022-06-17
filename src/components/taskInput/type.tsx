@@ -15,7 +15,7 @@ export type PresenterType = {
   chatIndex: number;
   text: string;
   setText: (e) => void;
-  handleSubmit: (e, chatIndex) => void;
+  handleSubmit: any;
 };
 
 export type newTodoType = {
